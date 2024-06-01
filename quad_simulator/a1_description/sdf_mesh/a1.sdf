@@ -97,18 +97,19 @@
       <velocity_decay/>
       <gravity>1</gravity>
       <sensor name='imu_sensor' type='imu'>
-        <always_on>1</always_on>
+        <always_on>true</always_on>
         <update_rate>1000</update_rate>
-        <visualize>1</visualize>
+        <visualize>true</visualize>
         <topic>__default_topic__</topic>
         <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
-          <topicName>trunk_imu</topicName>
+          <topicName>state/imu</topicName>
           <bodyName>imu_link</bodyName>
           <updateRateHZ>1000.0</updateRateHZ>
           <gaussianNoise>0.0</gaussianNoise>
           <xyzOffset>0 0 0</xyzOffset>
           <rpyOffset>0 0 0</rpyOffset>
           <frameName>imu_link</frameName>
+          <initialOrientationAsReference>false</initialOrientationAsReference>
         </plugin>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </sensor>
@@ -357,7 +358,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe2_collision_collision'>
+      <collision name='toe2_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -396,7 +397,7 @@
       <velocity_decay/>
       <sensor name='toe2_contact' type='contact'>
         <plugin name='toe2_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe2_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -677,7 +678,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe3_collision_collision'>
+      <collision name='toe3_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -716,7 +717,7 @@
       <velocity_decay/>
       <sensor name='toe3_contact' type='contact'>
         <plugin name='toe3_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe3_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -997,7 +998,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe0_collision_collision'>
+      <collision name='toe0_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -1036,7 +1037,7 @@
       <velocity_decay/>
       <sensor name='toe0_contact' type='contact'>
         <plugin name='toe0_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe0_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -1317,7 +1318,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe1_collision_collision'>
+      <collision name='toe1_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -1356,7 +1357,7 @@
       <velocity_decay/>
       <sensor name='toe1_contact' type='contact'>
         <plugin name='toe1_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe1_contact_state</bumperTopicName>
           <frameName>world</frameName>

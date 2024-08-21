@@ -73,52 +73,38 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://circleci.com/gh/robomechanics/quad-sdk/tree/main"><img src="https://circleci.com/gh/robomechanics/quad-sdk/tree/main.svg?style=shield" alt="CircleCI" style="pointer-events: none;" class="inline"/></a> <img src="doc/quad_sdk_promo.png" alt="Example image" class="inline"/></p>
-<h2>Overview</h2>
-<p>Quad-SDK is an open source, ROS-based full stack software framework for agile quadrupedal locomotion. The design of Quad-SDK is focused on the vertical integration of planning, control, estimation, communication, and development tools which enable agile quadrupedal locomotion in simulation and hardware with minimal user changes for multiple platforms. The modular software architecture allows researchers to experiment with their own implementations of different components while leveraging the existing framework. Quad-SDK also offers Gazebo simulation support and a suite of visualization and data-processing tools for rapid development. Refer to the <a href="https://www.andrew.cmu.edu/user/amj1/papers/Quad_SDK_ICRA_Abstract.pdf">paper</a> for high-level details of the framework.</p>
-<p><b>Keywords:</b> Legged Robotics, Quadrupeds, Planning, Control, Leaping, ROS</p>
-<h3>License</h3>
-<p>The source code is released under a [MIT License](LICENSE).</p>
-<p>**Authors: Joe Norby, Yanhao Yang, Ardalan Tajbakhsh, Jiming Ren, Justin K. Yim, Alexandra Stutt, Qishun Yu, Nikolai Flowers, and Aaron M. Johnson<br  />
- Affiliation: <a href="https://www.cmu.edu/me/robomechanicslab/">The Robomechanics Lab at Carnegie Mellon University</a><br  />
- Maintainer: Ardalan Tajbakhsh, <a href="#" onclick="location.href='mai'+'lto:'+'ata'+'jb'+'akh'+'@a'+'ndr'+'ew'+'.cm'+'u.'+'edu'; return false;">atajb<span class="obfuscator">.nosp@m.</span>akh@<span class="obfuscator">.nosp@m.</span>andre<span class="obfuscator">.nosp@m.</span>w.cm<span class="obfuscator">.nosp@m.</span>u.edu</a>**</p>
-<p>The packages in Quad-SDK have been tested under <a href="http://www.ros.org">ROS</a> Melodic on Ubuntu 18.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.</p>
-<h3>Publications</h3>
-<p>If you use this work in an academic context, please cite the following publications as relevant:</p>
+<h2>Quad-SDK Fork</h2>
+<p>This is a fork of the <a href="https://github.com/robomechanics/quad-sdk">Quad-SDK</a> repository, used to generate simulated UniTree Go2 data for use with the <a href="https://github.com/lunarlab-gatech/Morphology-Informed-HGNN">MI-HGNN</a> paper. For the main repository README.md or the documentation for how to use it, please see the original <a href="https://github.com/robomechanics/quad-sdk">Quad-SDK</a> repository.</p>
+<p>However, we made some alterations to the setup process in order to resolve issues or streamline the process. See the sections below for alterations to the install process, and for the list of changes, and the updated uses to replicate our dataset collection process:</p>
+<h2>Install Alterations</h2>
+<h3>Get HSL solver for IPOPT</h3>
+<p>On the "1. Getting Started with Quad SDK" page of the <a href="https://github.com/robomechanics/quad-sdk">Quad-SDK</a> Wiki, it mentions "Get HSL solver for IPOPT". However, you can't install the latest version of the solver, as it has build errors (see Issue #<a href="https://github.com/robomechanics/quad-sdk/issues/425">425</a>). As of the time of writing, it's unclear whether this is solved, but we worked around it by getting the 2022.11.09 version of the solver.</p>
+<h2>Changelog</h2>
 <ul>
-<li>Repository: J. Norby, Y. Yang, A. Tajbakhsh, J. Ren, J. K. Yim, A. Stutt, Q. Yu, N. Flowers, and A. M. Johnson. Quad- SDK: Full stack software framework for agile quadrupedal locomotion. In ICRA Workshop on Legged Robots, May 2022. (<a href="https://www.andrew.cmu.edu/user/amj1/papers/Quad_SDK_ICRA_Abstract.pdf">paper</a>) <pre class="fragment">  @inproceedings{abs:norby-quad-sdk-2022,
-    author        = {Joseph Norby and Yanhao Yang and Ardalan Tajbakhsh and Jiming Ren and Justin K. Yim and Alexandra Stutt and Qishun Yu and Nikolai Flowers and Aaron M. Johnson},
-    title         = {Quad-{SDK}: Full Stack Software Framework for Agile Quadrupedal Locomotion},
-    booktitle     = {ICRA Workshop on Legged Robots},
-    year          = {2022},
-    month         = {May},
-    type          = {workshop abstract},
-    url_Info      = {https://leggedrobots.org/index.html},
-    url_PDF       = {http://www.andrew.cmu.edu/user/amj1/papers/Quad_SDK_ICRA_Abstract.pdf},
-    keywords      = {Control,Planning,Leaping}
-  }
-</pre></li>
-<li>Global Planner: J. Norby and A. M. Johnson, “Fast global motion planning for dynamic legged robots,” in 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEE, 2020, pp. 3829–3836. (<a href="https://www.andrew.cmu.edu/user/amj1/papers/IROS2020_Fast_Global_Motion_Planning.pdf">paper</a>) <pre class="fragment">  @inproceedings{Norby2020,
-  title={Fast global motion planning for dynamic legged robots},
-  author={Norby, Joseph and Johnson, Aaron M},
-  booktitle={2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
-  pages={3829--3836},
-  year={2020},
-  organization={IEEE}
-  }
-</pre></li>
+<li>Enabled the "ma57" version of the HSL Solver for faster solving.</li>
+<li>Slowed Simulation speed down to 1/5 of real-world speed in order to prevent dropped ROS messages.</li>
+<li>The 'A1' robot is used by default instead of the 'Spirit' robot.</li>
+<li>Update IMU ROS topic from '&lt;robot&gt;/trunk_imu' to '&lt;robot&gt;/state/imu'.</li>
+<li>Set initialOrientationAsReference=false for IMU.</li>
+<li>Fix bug causing contact sensor information not to be properly reported.</li>
+<li>Increased the IMU update rate maximum to 1000 hz (which ends up being 750 hz in practice).</li>
+<li>Wrote the <a href="https://github.com/lunarlab-gatech/quad_sdk_message_synchronizer">Quad-SDK Message Synchronizer</a> in order to synchronize the three messages that we need.</li>
+<li>Logger now logs the ROS messages output from the <a href="https://github.com/lunarlab-gatech/quad_sdk_message_synchronizer">Quad-SDK Message Synchronizer</a>.</li>
+<li>Fixed the teleop_twist_joy package so Joysticks can be used to control the robot.</li>
+<li>Added Nintendo Switch Pro Controller Config file for Joystick input.</li>
 </ul>
-<h2>Installation</h2>
-<p>Refer to the <a href="https://github.com/robomechanics/quad-sdk/wiki/1.-Getting-Started-with-Quad-SDK">Quad-SDK Wiki</a> for installation, dependency, and unit testing information. Currently Quad-SDK requires ROS Melodic on Ubuntu 18.04. All other dependencies are installed with the included setup script.</p>
-<h2>Usage</h2>
-<p>Launch the simulation with:</p>
-<div class="fragment"><div class="line">roslaunch quad_utils quad_gazebo.launch</div>
+<h2>Updated Usage</h2>
+<p>Make sure to source the ROS Noetic install, and download the <a href="https://github.com/lunarlab-gatech/quad_sdk_message_synchronizer">Quad-SDK Message Synchronizer</a> into the same ROS workspace <code>src</code> folder as this repository.</p>
+<p>Launch the simulation with: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_gazebo.launch</div>
 </div><!-- fragment --><p>Stand the robot with: </p><div class="fragment"><div class="line">rostopic pub /robot_1/control/mode std_msgs/UInt8 &quot;data: 1&quot;</div>
-</div><!-- fragment --><p> Run the stack with twist input: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=twist logging:=true</div>
+</div><!-- fragment --><h3>Controlling the robot</h3>
+<p>There are two options, either a user can control it directly, or use the global planner to control the robot for them.</p>
+<p>To control the robot with keyboard input: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=twist logging:=true</div>
 <div class="line">rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/robot_1/cmd_vel</div>
-</div><!-- fragment --><p> Run the stack with global planner: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=gbpl logging:=true</div>
-</div><!-- fragment --><p> Refer to the <a href="https://github.com/robomechanics/quad-sdk/wiki/2.-Using-the-Software">Wiki</a> for more information on alternate usage.</p>
-<h2>Bugs &amp; Feature Requests</h2>
-<p>Please report bugs and request features using the <a href="https://github.com/robomechanics/quad-sdk/issues">Issue Tracker</a>. </p>
+</div><!-- fragment --><p>Or alternatively, launch the stack with the Joystick input: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=twist logging:=true</div>
+</div><!-- fragment --><p>Run the stack with global planner: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=gbpl logging:=true</div>
+</div><!-- fragment --><h3>Logging the dataset values</h3>
+<p>The dataset values we are interested in (and that are logged) can be seen below: </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

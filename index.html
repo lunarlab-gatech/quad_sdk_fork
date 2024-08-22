@@ -75,7 +75,7 @@ $(function() {
 <div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://circleci.com/gh/robomechanics/quad-sdk/tree/main"><img src="https://circleci.com/gh/robomechanics/quad-sdk/tree/main.svg?style=shield" alt="CircleCI" style="pointer-events: none;" class="inline"/></a> <img src="doc/quad_sdk_promo.png" alt="Example image" class="inline"/></p>
 <h2>Quad-SDK Fork</h2>
 <p>This is a fork of the <a href="https://github.com/robomechanics/quad-sdk">Quad-SDK</a> repository, used to generate simulated UniTree Go2 data for use with the <a href="https://github.com/lunarlab-gatech/Morphology-Informed-HGNN">MI-HGNN</a> paper. For the main repository README.md or the documentation for how to use it, please see the original <a href="https://github.com/robomechanics/quad-sdk">Quad-SDK</a> repository.</p>
-<p>However, we made some alterations to the setup process in order to resolve issues or streamline the process. See the sections below for alterations to the install process, and for the list of changes, and the updated uses to replicate our dataset collection process:</p>
+<p>However, we made some alterations to the setup process in order to resolve issues or streamline the process. See the sections below for alterations to the install process, the list of changes, and the updated usage to replicate our dataset collection process:</p>
 <h2>Install Alterations</h2>
 <h3>Get HSL solver for IPOPT</h3>
 <p>On the "1. Getting Started with Quad SDK" page of the <a href="https://github.com/robomechanics/quad-sdk">Quad-SDK</a> Wiki, it mentions "Get HSL solver for IPOPT". However, you can't install the latest version of the solver, as it has build errors (see Issue #<a href="https://github.com/robomechanics/quad-sdk/issues/425">425</a>). As of the time of writing, it's unclear whether this is solved, but we worked around it by getting the 2022.11.09 version of the solver.</p>
@@ -94,17 +94,55 @@ $(function() {
 <li>Added Nintendo Switch Pro Controller Config file for Joystick input.</li>
 </ul>
 <h2>Updated Usage</h2>
-<p>Make sure to source the ROS Noetic install, and download the <a href="https://github.com/lunarlab-gatech/quad_sdk_message_synchronizer">Quad-SDK Message Synchronizer</a> into the same ROS workspace <code>src</code> folder as this repository.</p>
+<p>Make sure to source the ROS Noetic install, and download the <a href="https://github.com/lunarlab-gatech/quad_sdk_message_synchronizer">Quad-SDK Message Synchronizer</a> into the same ROS workspace <code>src</code> folder as this repository, and then rebuild and re-source the ros workspace.</p>
 <p>Launch the simulation with: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_gazebo.launch</div>
 </div><!-- fragment --><p>Stand the robot with: </p><div class="fragment"><div class="line">rostopic pub /robot_1/control/mode std_msgs/UInt8 &quot;data: 1&quot;</div>
 </div><!-- fragment --><h3>Controlling the robot</h3>
 <p>There are two options, either a user can control it directly, or use the global planner to control the robot for them.</p>
-<p>To control the robot with keyboard input: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=twist logging:=true</div>
+<p>To control the robot with keyboard input: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=twist</div>
 <div class="line">rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/robot_1/cmd_vel</div>
-</div><!-- fragment --><p>Or alternatively, launch the stack with the Joystick input: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=twist logging:=true</div>
-</div><!-- fragment --><p>Run the stack with global planner: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=gbpl logging:=true</div>
+</div><!-- fragment --><p>Or to control the robot with Joystick input: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=twist</div>
+<div class="line">roslaunch teleop_twist_joy teleop.launch</div>
+</div><!-- fragment --><p> To edit the speed that the joystick sends, see "external/teleop_twist_joy/config/pro_controller.config.yaml". Changing <code>scale_linear</code> and <code>scale_angular</code> changes the forward and turning speeds, respectively.</p>
+<p>Or, to have the global planner drive the robot: </p><div class="fragment"><div class="line">roslaunch quad_utils quad_plan.launch reference:=gbpl</div>
 </div><!-- fragment --><h3>Logging the dataset values</h3>
-<p>The dataset values we are interested in (and that are logged) can be seen below: </p>
+<p>To log the dataset, run the following commands </p><div class="fragment"><div class="line">roslaunch quad_sdk_message_synchronizer synch_log_messages.launch</div>
+<div class="line">roslaunch quad_utils logging.launch</div>
+</div><!-- fragment --><p>The timestamped file will be saved in the <code>quad_logger/bags/archive/</code> folder.</p>
+<p>The dataset values we are interested in (and that are logged) can be seen below:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Data   </th><th class="markdownTableHeadNone">Source   </th><th class="markdownTableHeadNone">Frame   </th><th class="markdownTableHeadNone">Units   </th><th class="markdownTableHeadNone">ROS Topic    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Joint Position   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/ground_truth    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Joint Velocity   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/ground_truth    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Joint Feedback Torque   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/ground_truth    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Linear Acceleration   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/imu    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Angular Velocity   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/imu    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Robot Position   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/ground_truth    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Robot Orientation   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/ground_truth    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Foot Position   </td><td class="markdownTableBodyNone">Not Yet Implemented   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">???    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Foot Velocity   </td><td class="markdownTableBodyNone">Not Yet Implemented   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">???    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Ground Reaction Forces   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">/&lt;robot&gt;/state/grfs   </td></tr>
+</table>
+<h3>Debugging</h3>
+<p>If you have any issues with the simulator, closing all terminal tabs and restarting has been found to resolve some problems.</p>
+<h2>Important Resources</h2>
+<p>These following websites have been useful for determining how Gazebo and Quad-SDK works:</p>
+<ul>
+<li>Creating Custom Terrain Files (<a href="https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Creating-Custom-Terrain-Map-Files">https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Creating-Custom-Terrain-Map-Files</a>)</li>
+<li>Adding a new type of Robot (<a href="https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Adding-a-New-Type-of-Robot-to-Quad-SDK">https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Adding-a-New-Type-of-Robot-to-Quad-SDK</a>)</li>
+<li></li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

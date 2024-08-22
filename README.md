@@ -75,16 +75,16 @@ The dataset values we are interested in (and that are logged) can be seen below:
 
 | Data                     | Source  | Frame | Units      | ROS Topic                   |
 | ------------------------ | ------- | ----- | ---------- | --------------------------- |
-| Joint Position           |         |       |            | /<robot>/state/ground_truth |
-| Joint Velocity           |         |       |            | /<robot>/state/ground_truth |
-| Joint Feedback Torque    |         |       |            | /<robot>/state/ground_truth |
-| Linear Acceleration      |         |       |            | /<robot>/state/imu          |
-| Angular Velocity         |         |       |            | /<robot>/state/imu          |
-| Robot Position           |         |       |            | /<robot>/state/ground_truth |
-| Robot Orientation        |         |       |            | /<robot>/state/ground_truth |
+| Joint Position           |         |       |            | /robot_1/state/ground_truth |
+| Joint Velocity           |         |       |            | /robot_1/state/ground_truth |
+| Joint Feedback Torque    |         |       |            | /robot_1/state/ground_truth |
+| Linear Acceleration      |         |       |            | /robot_1/state/imu          |
+| Angular Velocity         |         |       |            | /robot_1/state/imu          |
+| Robot Position           |         |       |            | /robot_1/state/ground_truth |
+| Robot Orientation        |         |       |            | /robot_1/state/ground_truth |
 | Foot Position            | Not Yet Implemented             |       |            | ??? |
 | Foot Velocity            | Not Yet Implemented             |       |            | ??? |
-| Ground Reaction Forces   |         |       |            | /<robot>/state/grfs         |
+| Ground Reaction Forces   |         |       |            | /robot_1/state/grfs         |
 
 ### Debugging
 
@@ -94,6 +94,18 @@ If you have any issues with the simulator, closing all terminal tabs and restart
 
 These following websites have been useful for determining how Gazebo and Quad-SDK works:
 
+### Quad-SDK Tutorials
 - Creating Custom Terrain Files (https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Creating-Custom-Terrain-Map-Files)
 - Adding a new type of Robot (https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Adding-a-New-Type-of-Robot-to-Quad-SDK)
--
+
+### Gazebo Documentation
+- Gazebo Classic Documentation - This repository uses version 11.14.0 (https://classic.gazebosim.org/tutorials)
+- Setting Friction parameters in Gazebo (https://classic.gazebosim.org/tutorials?tut=friction&cat=physics)
+- Gazebo Physics parameters (https://classic.gazebosim.org/tutorials?tut=physics_params&cat=physics)
+- Gazebo ROS Plugin Tutorial - Also contains ROS Plugin for IMU (https://classic.gazebosim.org/tutorials?tut=ros_gzplugins)
+- Sensor Noise models (https://classic.gazebosim.org/tutorials?tut=sensor_noise#Introduction)
+
+### API
+- Gazebo API Reference - Great for understanding Gazebo Sensor implementations, functions, etc. (https://osrf-distributions.s3.amazonaws.com/gazebo/api/dev/index.html)
+- Contact Sensor Class Reference (https://osrf-distributions.s3.amazonaws.com/gazebo/api/dev/classgazebo_1_1sensors_1_1ContactSensor.html)
+- Joint Class Reference (https://osrf-distributions.s3.amazonaws.com/gazebo/api/dev/classgazebo_1_1physics_1_1Joint.html#a85f6b25f1d0d6451a84875c18c57535d)

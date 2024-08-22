@@ -5,7 +5,7 @@
 
 This is a fork of the [Quad-SDK](https://github.com/robomechanics/quad-sdk) repository, used to generate simulated UniTree Go2 data for use with the [MI-HGNN](https://github.com/lunarlab-gatech/Morphology-Informed-HGNN) paper. For the main repository README.md or the documentation for how to use it, please see the original [Quad-SDK](https://github.com/robomechanics/quad-sdk) repository.
 
-However, we made some alterations to the setup process in order to resolve issues or streamline the process. See the sections below for alterations to the install process, and for the list of changes, and the updated uses to replicate our dataset collection process:
+However, we made some alterations to the setup process in order to resolve issues or streamline the process. See the sections below for alterations to the install process, the list of changes, and the updated usage to replicate our dataset collection process:
 
 ## Install Alterations
 
@@ -27,7 +27,7 @@ On the "1. Getting Started with Quad SDK" page of the [Quad-SDK](https://github.
 - Added Nintendo Switch Pro Controller Config file for Joystick input.
 
 ## Updated Usage
-Make sure to source the ROS Noetic install, and download the [Quad-SDK Message Synchronizer](https://github.com/lunarlab-gatech/quad_sdk_message_synchronizer) into the same ROS workspace `src` folder as this repository.
+Make sure to source the ROS Noetic install, and download the [Quad-SDK Message Synchronizer](https://github.com/lunarlab-gatech/quad_sdk_message_synchronizer) into the same ROS workspace `src` folder as this repository, and then rebuild and re-source the ros workspace.
 
 Launch the simulation with:
 ```
@@ -45,23 +45,55 @@ There are two options, either a user can control it directly, or use the global 
 
 To control the robot with keyboard input:
 ```
-roslaunch quad_utils quad_plan.launch reference:=twist logging:=true
+roslaunch quad_utils quad_plan.launch reference:=twist
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/robot_1/cmd_vel
 ```
 
-Or alternatively, launch the stack with the Joystick input:
+Or to control the robot with Joystick input:
 ```
-roslaunch quad_utils quad_plan.launch reference:=twist logging:=true
+roslaunch quad_utils quad_plan.launch reference:=twist
+roslaunch teleop_twist_joy teleop.launch
+```
+To edit the speed that the joystick sends, see "external/teleop_twist_joy/config/pro_controller.config.yaml". Changing `scale_linear` and `scale_angular` changes the forward and turning speeds, respectively.
 
+Or, to have the global planner drive the robot:
 ```
-
-Run the stack with global planner:
-```
-roslaunch quad_utils quad_plan.launch reference:=gbpl logging:=true
+roslaunch quad_utils quad_plan.launch reference:=gbpl
 ```
 
 ### Logging the dataset values
 
+To log the dataset, run the following commands
+```
+roslaunch quad_sdk_message_synchronizer synch_log_messages.launch
+roslaunch quad_utils logging.launch
+```
+
+The timestamped file will be saved in the `quad_logger/bags/archive/` folder.
 
 The dataset values we are interested in (and that are logged) can be seen below:
 
+| Data                     | Source  | Frame | Units      | ROS Topic                   |
+| ------------------------ | ------- | ----- | ---------- | --------------------------- |
+| Joint Position           |         |       |            | /<robot>/state/ground_truth |
+| Joint Velocity           |         |       |            | /<robot>/state/ground_truth |
+| Joint Feedback Torque    |         |       |            | /<robot>/state/ground_truth |
+| Linear Acceleration      |         |       |            | /<robot>/state/imu          |
+| Angular Velocity         |         |       |            | /<robot>/state/imu          |
+| Robot Position           |         |       |            | /<robot>/state/ground_truth |
+| Robot Orientation        |         |       |            | /<robot>/state/ground_truth |
+| Foot Position            | Not Yet Implemented             |       |            | ??? |
+| Foot Velocity            | Not Yet Implemented             |       |            | ??? |
+| Ground Reaction Forces   |         |       |            | /<robot>/state/grfs         |
+
+### Debugging
+
+If you have any issues with the simulator, closing all terminal tabs and restarting has been found to resolve some problems. 
+
+## Important Resources
+
+These following websites have been useful for determining how Gazebo and Quad-SDK works:
+
+- Creating Custom Terrain Files (https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Creating-Custom-Terrain-Map-Files)
+- Adding a new type of Robot (https://github.com/robomechanics/quad-sdk/wiki/Tutorial:-Adding-a-New-Type-of-Robot-to-Quad-SDK)
+-

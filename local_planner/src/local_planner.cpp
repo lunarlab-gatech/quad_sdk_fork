@@ -118,7 +118,12 @@ void LocalPlanner::initLocalBodyPlanner() {
     type = SPIRIT;
   } else if (robot_name_ == "a1") {
     type = A1;
-  } else {
+  } 
+  else if
+    (robot_name_ == "go2") {
+    type = GO2;
+  }
+  else {
     ROS_WARN("WRONG ROBOT TYPE");
   }
   local_body_planner_nonlinear_ = std::make_shared<NMPCController>(nh_, type);

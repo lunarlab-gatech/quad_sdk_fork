@@ -49,6 +49,9 @@ link_directories(/usr/local/lib)
 
 ## Declare a C++ library for control
 add_library(nmpc_controller
+  src/gen/eval_g_go2.cpp
+  src/gen/eval_jac_g_go2.cpp
+  src/gen/eval_hess_g_go2.cpp
   src/gen/eval_g_spirit.cpp
   src/gen/eval_jac_g_spirit.cpp
   src/gen/eval_hess_g_spirit.cpp

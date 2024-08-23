@@ -37,6 +37,12 @@
 #include "nmpc_controller/gen/eval_jac_g_leg_simple.h"
 #include "nmpc_controller/gen/eval_jac_g_leg_simple_to_complex.h"
 #include "nmpc_controller/gen/eval_jac_g_spirit.h"
+
+#include "nmpc_controller/gen/eval_jac_g_go2.h"
+#include "nmpc_controller/gen/eval_hess_g_go2.h"
+#include "nmpc_controller/gen/eval_g_go2.h"
+
+
 #include "quad_utils/function_timer.h"
 #include "quad_utils/quad_kd.h"
 
@@ -45,6 +51,7 @@ using namespace Ipopt;
 enum SystemID {
   SPIRIT,
   A1,
+  GO2,
   SIMPLE_TO_SIMPLE,
   SIMPLE_TO_COMPLEX,
   COMPLEX_TO_COMPLEX,
@@ -156,7 +163,7 @@ class quadNLP : public TNLP {
 
   /// Declare the number of possible system ids (must match size of SystemID
   /// enum)
-  static const int num_sys_id_ = 6;
+  static const int num_sys_id_ = 7;
 
   /// Declare the number of possible function ids (must match size of FunctionID
   /// enum)

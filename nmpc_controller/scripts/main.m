@@ -1,7 +1,7 @@
 clear all; clc; close all;
 
 addpath('./utils')
-
+% addpath('/home/lunarlab/Downloads/casadi-3.6.6-linux64-matlab2018b')
 %% Physics parameter
 parameter.physics.gravitational_constant=9.81; % Gravity
 
@@ -33,7 +33,7 @@ parameter.physics.inertia_body=parameter.physics.inertia_body+...
     parameter.physics.hip_offset(1)^2+parameter.physics.hip_offset(3)^2;
     parameter.physics.hip_offset(1)^2+parameter.physics.hip_offset(2)^2]); % Robot inertia (assume leg mass concentrated at hip)
 
-parameter.name = "spirit"; % Model name
+parameter.name = "go2"; % Model name
 parameter.n = 12; % State dimension
 parameter.m = 12; % Input dimension
 

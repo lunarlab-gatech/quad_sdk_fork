@@ -1,6 +1,6 @@
 <sdf version='1.7'>
   <model name='go2_description'>
-    <link name='base'>
+    <link name='body'>
       <inertial>
         <pose>0.021189 0 -0.005372 0 -0 0</pose>
         <mass>6.923</mass>
@@ -13,7 +13,7 @@
           <izz>0.107163</izz>
         </inertia>
       </inertial>
-      <collision name='base_collision'>
+      <collision name='body_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <box>
@@ -21,7 +21,7 @@
           </box>
         </geometry>
       </collision>
-      <collision name='base_fixed_joint_lump__Head_upper_collision_1'>
+      <collision name='body_fixed_joint_lump__Head_upper_collision_1'>
         <pose>0.285 0 0.01 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -30,7 +30,7 @@
           </cylinder>
         </geometry>
       </collision>
-      <collision name='base_fixed_joint_lump__Head_lower_collision_2'>
+      <collision name='body_fixed_joint_lump__Head_lower_collision_2'>
         <pose>0.293 0 -0.06 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -38,19 +38,19 @@
           </sphere>
         </geometry>
       </collision>
-      <visual name='base_visual'>
+      <visual name='body_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://go2_description/dae/base.dae</uri>
+            <uri>model://go2_description/dae/body.dae</uri>
           </mesh>
         </geometry>
       </visual>
     </link>
     <joint name='FL_hip_joint' type='revolute'>
-      <pose relative_to='base'>0.1934 0.0465 0 0 -0 0</pose>
-      <parent>base</parent>
+      <pose relative_to='body'>0.1934 0.0465 0 0 -0 0</pose>
+      <parent>body</parent>
       <child>FL_hip</child>
       <axis>
         <xyz>1 0 0</xyz>
@@ -236,8 +236,8 @@
       </visual>
     </link>
     <joint name='FR_hip_joint' type='revolute'>
-      <pose relative_to='base'>0.1934 -0.0465 0 0 -0 0</pose>
-      <parent>base</parent>
+      <pose relative_to='body'>0.1934 -0.0465 0 0 -0 0</pose>
+      <parent>body</parent>
       <child>FR_hip</child>
       <axis>
         <xyz>1 0 0</xyz>
@@ -423,8 +423,8 @@
       </visual>
     </link>
     <joint name='RL_hip_joint' type='revolute'>
-      <pose relative_to='base'>-0.1934 0.0465 0 0 -0 0</pose>
-      <parent>base</parent>
+      <pose relative_to='body'>-0.1934 0.0465 0 0 -0 0</pose>
+      <parent>body</parent>
       <child>RL_hip</child>
       <axis>
         <xyz>1 0 0</xyz>
@@ -610,8 +610,8 @@
       </visual>
     </link>
     <joint name='RR_hip_joint' type='revolute'>
-      <pose relative_to='base'>-0.1934 -0.0465 0 0 -0 0</pose>
-      <parent>base</parent>
+      <pose relative_to='body'>-0.1934 -0.0465 0 0 -0 0</pose>
+      <parent>body</parent>
       <child>RR_hip</child>
       <axis>
         <xyz>1 0 0</xyz>
@@ -800,15 +800,15 @@
       <pose>0.008 0 -0.07 0 -0 0</pose>
     </frame>
     <frame name='Head_lower' attached_to='Head_lower_joint'/>
-    <frame name='Head_upper_joint' attached_to='base'>
+    <frame name='Head_upper_joint' attached_to='body'>
       <pose>0.285 0 0.01 0 -0 0</pose>
     </frame>
     <frame name='Head_upper' attached_to='Head_upper_joint'/>
-    <frame name='imu_joint' attached_to='base'>
+    <frame name='imu_joint' attached_to='body'>
       <pose>-0.02557 0 0.04232 0 -0 0</pose>
     </frame>
     <frame name='imu' attached_to='imu_joint'/>
-    <frame name='radar_joint' attached_to='base'>
+    <frame name='radar_joint' attached_to='body'>
       <pose>0.28945 0 -0.046825 3.14159 0.263393 3.14159</pose>
     </frame>
     <frame name='radar' attached_to='radar_joint'/>

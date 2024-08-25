@@ -18,6 +18,10 @@ NMPCController::NMPCController(ros::NodeHandle &nh, int robot_id) {
       robot_ns_ = "go2";
       default_system = GO2;
       break;
+    case 3:
+      robot_ns_ = "go2test";
+      default_system = GO2TEST;
+      break;
     default:
       robot_ns_ = "spirit";
       default_system = SPIRIT;

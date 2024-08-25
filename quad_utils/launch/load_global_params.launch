@@ -35,6 +35,10 @@
         <param name="robot_description" command="cat $(find go2_description)/urdf/go2.urdf" />
     </group>
 
+    <group if="$(eval arg('robot_type') == 'go2test')">
+        <param name="robot_description_sdf" textfile="$(find go2test_description)/sdf_mesh/go2test.sdf" />
+        <param name="robot_description" command="cat $(find go2test_description)/urdf/go2test.urdf" />
+    </group>
 
     <group if="$(arg load_robot_params)">
         <include file="$(find quad_utils)/launch/load_robot_params.launch"/>

@@ -123,6 +123,10 @@ void LocalPlanner::initLocalBodyPlanner() {
     (robot_name_ == "go2") {
     type = GO2;
   }
+  else if
+    (robot_name_ == "go2test") {
+    type = GO2TEST;
+  }
   else {
     ROS_WARN("WRONG ROBOT TYPE");
   }

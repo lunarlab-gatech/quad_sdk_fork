@@ -42,6 +42,10 @@
 #include "nmpc_controller/gen/eval_hess_g_go2.h"
 #include "nmpc_controller/gen/eval_g_go2.h"
 
+#include "nmpc_controller/gen/eval_jac_g_go2test.h"
+#include "nmpc_controller/gen/eval_hess_g_go2test.h"
+#include "nmpc_controller/gen/eval_g_go2test.h"
+
 
 #include "quad_utils/function_timer.h"
 #include "quad_utils/quad_kd.h"
@@ -52,6 +56,7 @@ enum SystemID {
   SPIRIT,
   A1,
   GO2,
+  GO2TEST,
   SIMPLE_TO_SIMPLE,
   SIMPLE_TO_COMPLEX,
   COMPLEX_TO_COMPLEX,
@@ -163,7 +168,7 @@ class quadNLP : public TNLP {
 
   /// Declare the number of possible system ids (must match size of SystemID
   /// enum)
-  static const int num_sys_id_ = 7;
+  static const int num_sys_id_ = 8;
 
   /// Declare the number of possible function ids (must match size of FunctionID
   /// enum)

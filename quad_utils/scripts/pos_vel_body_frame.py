@@ -1,9 +1,8 @@
 #!/usr/bin/env python 
-
 import rospy
 import numpy as np
 from gazebo_msgs.msg import LinkStates
-from tf.transformations import quaternion_matrix
+from tf.transformations import quaternion_matrix, euler_from_quaternion
 
 # Helper function to convert quaternion to a rotation matrix
 def quaternion_to_rotation_matrix(quat):
@@ -33,6 +32,13 @@ def link_states_callback(data):
             toe_position_world = data.pose[toe_index].position
             toe_orientation_world = data.pose[toe_index].orientation
             
+            # Transform position to the body frame
+            toe_position_body = transform_to_body_frame(body_rotation_matrix, toe_position_world)
+            
+            # Convert quaternion to Euler angles for easier interpretation
+            toe_orientation_quat = [toe_orientation_world.x, toe_orientation_world.y, toe_orientation_world.z, toe_orientation_world.w]
+            toe_orientation_euler = euler_from_quaternion(toe_orientation_quat)  # This will give roll, pitch, yaw
+            
             # Get linear and angular velocities of the toe in the world frame
             toe_linear_velocity_world = data.twist[toe_index].linear
             toe_angular_velocity_world = data.twist[toe_index].angular
@@ -41,7 +47,10 @@ def link_states_callback(data):
             toe_linear_velocity_body = transform_to_body_frame(body_rotation_matrix, toe_linear_velocity_world)
             toe_angular_velocity_body = transform_to_body_frame(body_rotation_matrix, toe_angular_velocity_world)
             
+            # Log the position, orientation, and velocities in the body frame
             rospy.loginfo(f"{toe_link}:")
+            rospy.loginfo(f"  Position in Body Frame: {toe_position_body}")
+            rospy.loginfo(f"  Orientation (Roll, Pitch, Yaw) in Body Frame: {toe_orientation_euler}")
             rospy.loginfo(f"  Linear Velocity in Body Frame: {toe_linear_velocity_body}")
             rospy.loginfo(f"  Angular Velocity in Body Frame: {toe_angular_velocity_body}")
 

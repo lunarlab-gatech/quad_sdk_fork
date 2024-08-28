@@ -68,7 +68,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/trunk.dae</uri>
+            <uri>model:///meshes/trunk.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -97,18 +97,19 @@
       <velocity_decay/>
       <gravity>1</gravity>
       <sensor name='imu_sensor' type='imu'>
-        <always_on>1</always_on>
+        <always_on>true</always_on>
         <update_rate>1000</update_rate>
-        <visualize>1</visualize>
+        <visualize>true</visualize>
         <topic>__default_topic__</topic>
         <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
-          <topicName>trunk_imu</topicName>
+          <topicName>state/imu</topicName>
           <bodyName>imu_link</bodyName>
           <updateRateHZ>1000.0</updateRateHZ>
           <gaussianNoise>0.0</gaussianNoise>
           <xyzOffset>0 0 0</xyzOffset>
           <rpyOffset>0 0 0</rpyOffset>
           <frameName>imu_link</frameName>
+          <initialOrientationAsReference>false</initialOrientationAsReference>
         </plugin>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </sensor>
@@ -154,7 +155,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/hip.dae</uri>
+            <uri>model:///meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -170,6 +171,9 @@
     <joint name='10' type='revolute'>
       <child>hip2</child>
       <parent>body</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -228,7 +232,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/thigh_mirror.dae</uri>
+            <uri>model:///meshes/thigh_mirror.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -245,11 +249,14 @@
     <joint name='4' type='revolute'>
       <child>upper2</child>
       <parent>hip2</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>-2.6179938779914944</lower>
+          <upper>2.6179938779914944</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -300,7 +307,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/calf.dae</uri>
+            <uri>model:///meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -317,11 +324,14 @@
     <joint name='5' type='revolute'>
       <child>lower2</child>
       <parent>upper2</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>0.445058959258554</lower>
+          <upper>2.2252947962927703</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -348,7 +358,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe2_collision_collision'>
+      <collision name='toe2_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -387,7 +397,7 @@
       <velocity_decay/>
       <sensor name='toe2_contact' type='contact'>
         <plugin name='toe2_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe2_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -465,7 +475,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/hip.dae</uri>
+            <uri>model:///meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -481,6 +491,9 @@
     <joint name='11' type='revolute'>
       <child>hip3</child>
       <parent>body</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -539,7 +552,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/thigh_mirror.dae</uri>
+            <uri>model:///meshes/thigh_mirror.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -556,11 +569,14 @@
     <joint name='6' type='revolute'>
       <child>upper3</child>
       <parent>hip3</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>-2.6179938779914944</lower>
+          <upper>2.6179938779914944</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -611,7 +627,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/calf.dae</uri>
+            <uri>model:///meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -628,11 +644,14 @@
     <joint name='7' type='revolute'>
       <child>lower3</child>
       <parent>upper3</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>0.445058959258554</lower>
+          <upper>2.2252947962927703</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -659,7 +678,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe3_collision_collision'>
+      <collision name='toe3_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -698,7 +717,7 @@
       <velocity_decay/>
       <sensor name='toe3_contact' type='contact'>
         <plugin name='toe3_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe3_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -776,7 +795,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/hip.dae</uri>
+            <uri>model:///meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -792,6 +811,9 @@
     <joint name='8' type='revolute'>
       <child>hip0</child>
       <parent>body</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -850,7 +872,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/thigh.dae</uri>
+            <uri>model:///meshes/thigh.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -867,11 +889,14 @@
     <joint name='0' type='revolute'>
       <child>upper0</child>
       <parent>hip0</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>-2.6179938779914944</lower>
+          <upper>2.6179938779914944</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -922,7 +947,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/calf.dae</uri>
+            <uri>model:///meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -939,11 +964,14 @@
     <joint name='1' type='revolute'>
       <child>lower0</child>
       <parent>upper0</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>0.445058959258554</lower>
+          <upper>2.2252947962927703</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -970,7 +998,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe0_collision_collision'>
+      <collision name='toe0_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -1009,7 +1037,7 @@
       <velocity_decay/>
       <sensor name='toe0_contact' type='contact'>
         <plugin name='toe0_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe0_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -1087,7 +1115,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/hip.dae</uri>
+            <uri>model:///meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -1103,6 +1131,9 @@
     <joint name='9' type='revolute'>
       <child>hip1</child>
       <parent>body</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -1161,7 +1192,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/thigh.dae</uri>
+            <uri>model:///meshes/thigh.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -1178,11 +1209,14 @@
     <joint name='2' type='revolute'>
       <child>upper1</child>
       <parent>hip1</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>-2.6179938779914944</lower>
+          <upper>2.6179938779914944</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -1233,7 +1267,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://a1_description/meshes/calf.dae</uri>
+            <uri>model:///meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -1250,11 +1284,14 @@
     <joint name='3' type='revolute'>
       <child>lower1</child>
       <parent>upper1</parent>
+      <physics>
+        <provide_feedback>true</provide_feedback>
+      </physics>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-6.28319</lower>
-          <upper>6.28319</upper>
+          <lower>0.445058959258554</lower>
+          <upper>2.2252947962927703</upper>
           <effort>33.5</effort>
           <velocity>21</velocity>
         </limit>
@@ -1281,7 +1318,7 @@
           <izz>9.6e-06</izz>
         </inertia>
       </inertial>
-      <collision name='toe1_collision_collision'>
+      <collision name='toe1_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <sphere>
@@ -1320,7 +1357,7 @@
       <velocity_decay/>
       <sensor name='toe1_contact' type='contact'>
         <plugin name='toe1_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>1</alwaysOn>
+          <alwaysOn>true</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe1_contact_state</bumperTopicName>
           <frameName>world</frameName>

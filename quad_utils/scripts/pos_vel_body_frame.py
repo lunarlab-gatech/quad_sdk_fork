@@ -1,8 +1,9 @@
 #!/usr/bin/env python 
+
 import rospy
 import numpy as np
 from gazebo_msgs.msg import LinkStates
-from tf.transformations import quaternion_matrix, euler_from_quaternion
+from tf.transformations import quaternion_matrix, euler_from_quaternion, quaternion_multiply, quaternion_inverse
 
 # Helper function to convert quaternion to a rotation matrix
 def quaternion_to_rotation_matrix(quat):
@@ -19,10 +20,13 @@ def link_states_callback(data):
     toe_links = ["robot_1::toe0", "robot_1::toe1", "robot_1::toe2", "robot_1::toe3"]
     
     try:
-        # Get the index of the robot body link to obtain the body's rotation matrix
+        # Get the index of the robot body link to obtain the body's rotation matrix and position
         body_index = data.name.index(robot_body_link)
         body_orientation = data.pose[body_index].orientation
+        body_position = data.pose[body_index].position
+        
         body_rotation_matrix = quaternion_to_rotation_matrix(body_orientation)
+        body_orientation_inv = quaternion_inverse([body_orientation.x, body_orientation.y, body_orientation.z, body_orientation.w])
         
         # Process each toe link
         for toe_link in toe_links:
@@ -32,12 +36,18 @@ def link_states_callback(data):
             toe_position_world = data.pose[toe_index].position
             toe_orientation_world = data.pose[toe_index].orientation
             
-            # Transform position to the body frame
-            toe_position_body = transform_to_body_frame(body_rotation_matrix, toe_position_world)
+            # Calculate the position of the toe relative to the body in the world frame
+            relative_position_world = np.array([toe_position_world.x - body_position.x,
+                                                toe_position_world.y - body_position.y,
+                                                toe_position_world.z - body_position.z])
             
-            # Convert quaternion to Euler angles for easier interpretation
+            # Transform position to the body frame using rotation
+            toe_position_body = np.dot(body_rotation_matrix.T, relative_position_world)
+            
+            # Convert quaternion to Euler angles relative to the body frame
             toe_orientation_quat = [toe_orientation_world.x, toe_orientation_world.y, toe_orientation_world.z, toe_orientation_world.w]
-            toe_orientation_euler = euler_from_quaternion(toe_orientation_quat)  # This will give roll, pitch, yaw
+            toe_orientation_body = quaternion_multiply(body_orientation_inv, toe_orientation_quat)
+            toe_orientation_euler = euler_from_quaternion(toe_orientation_body)  # This will give roll, pitch, yaw relative to the body
             
             # Get linear and angular velocities of the toe in the world frame
             toe_linear_velocity_world = data.twist[toe_index].linear

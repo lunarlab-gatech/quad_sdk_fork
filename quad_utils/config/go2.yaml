@@ -8,8 +8,8 @@ global_body_planner:
   robot_w: 0.3                            # Width of robot body, m
   robot_h: 0.05                           # Vertical distance between leg base and bottom of robot, m
   mass: 15.0                              # Robot mass, kg
-  grf_min: 6.0                            # Minimum GRF in units of body weight (only used for sampling)
-  grf_max: 7.0                            # Maximum GRF in units of body weight
+  grf_min: 4.0                            # Minimum GRF in units of body weight (only used for sampling)
+  grf_max: 5.0                            # Maximum GRF in units of body weight
 
 local_footstep_planner:
   hip_clearance: 0.1

@@ -4,7 +4,7 @@
     <include file="$(find quad_utils)/launch/load_global_params.launch" />
     <include file="$(find quad_utils)/launch/load_robot_params.launch" />
 
-    <arg name="bag_name" default="quad_log"/>
+    <arg name="bag_name" default="go2_test1_flat"/>
 
     <!-- Record bag in bag dir, not timestamped -->
     <node pkg="rosbag" type="record" name="rosbag_record" args="record -O $(find quad_logger)/bags/$(arg namespace)_$(arg bag_name) --tcpnodelay

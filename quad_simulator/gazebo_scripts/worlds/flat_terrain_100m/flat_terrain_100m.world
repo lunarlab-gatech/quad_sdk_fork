@@ -23,7 +23,7 @@
         <visual name="visual">
           <geometry>
             <mesh>
-              <uri>model:///flat/flat.stl</uri>
+              <uri>model:///flat_terrain_100m/flat_terrain_100m.stl</uri>
               <scale>6 1 1</scale> <!-- Added scale tag here -->
             </mesh>
           </geometry>
@@ -31,7 +31,7 @@
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>model:///flat/flat.stl</uri>
+              <uri>model:///flat_terrain_100m/flat_terrain_100m.stl</uri>
               <scale>6 1 1</scale> <!-- Added scale tag here -->
             </mesh>
           </geometry>

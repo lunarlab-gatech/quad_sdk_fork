@@ -68,7 +68,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/trunk.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/trunk.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -155,7 +155,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/hip.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -232,7 +232,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/thigh_mirror.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/thigh_mirror.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -307,7 +307,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/calf.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -475,7 +475,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/hip.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -552,7 +552,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/thigh_mirror.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/thigh_mirror.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -627,7 +627,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/calf.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -795,7 +795,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/hip.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -872,7 +872,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/thigh.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/thigh.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -947,7 +947,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/calf.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -1115,7 +1115,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/hip.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -1192,7 +1192,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/thigh.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/thigh.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -1267,7 +1267,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model:///meshes/calf.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
         <material>

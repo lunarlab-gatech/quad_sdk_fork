@@ -84,8 +84,13 @@ The dataset values we are interested in (and that are logged) can be seen below:
 | Robot Orientation        |         |       |            | /robot_1/state/ground_truth |
 | Foot Position            | Not Yet Implemented             |       |            | ??? |
 | Foot Velocity            | Not Yet Implemented             |       |            | ??? |
-| Ground Reaction Forces   |         |       |            | /robot_1/state/grfs         |
+| Ground Reaction Forces   | quad_simulator/gazebo_scripts/src/contact_state_publisher.cpp  | World Frame (C) |           | /robot_1/state/grfs         |
 
+To show strength of evidence, we have multiple levels as outlined below:
+- C (Comment in file)
+- D (Documentation)
+- V (Verified directy by ourselves, through some test)
+- 
 ### Debugging
 
 If you have any issues with the simulator, closing all terminal tabs and restarting has been found to resolve some problems. 

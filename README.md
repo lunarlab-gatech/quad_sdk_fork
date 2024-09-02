@@ -73,24 +73,28 @@ The timestamped file will be saved in the `quad_logger/bags/archive/` folder.
 
 The dataset values we are interested in (and that are logged) can be seen below:
 
-| Data                     | Source  | Frame | Units      | ROS Topic                   |
-| ------------------------ | ------- | ----- | ---------- | --------------------------- |
-| Joint Position           |         |       |            | /robot_1/state/ground_truth |
-| Joint Velocity           |         |       |            | /robot_1/state/ground_truth |
-| Joint Feedback Torque    |         |       |            | /robot_1/state/ground_truth |
-| Linear Acceleration      |         |       |            | /robot_1/state/imu          |
-| Angular Velocity         |         |       |            | /robot_1/state/imu          |
-| Robot Position           |         |       |            | /robot_1/state/ground_truth |
-| Robot Orientation        |         |       |            | /robot_1/state/ground_truth |
+| Data                     | Source                          | Frame | Units      | ROS Topic                   |
+| ------------------------ | ------------------------------- | ----- | ---------- | --------------------------- |
+| Joint Position           |                                 |       |            | /robot_1/state/ground_truth |
+| Joint Velocity           |                                 |       |            | /robot_1/state/ground_truth |
+| Joint Feedback Torque    |                                 |       |            | /robot_1/state/ground_truth |
+| Linear Acceleration      |                                 |       |            | /robot_1/state/imu          |
+| Angular Velocity         |                                 |       |            | /robot_1/state/imu          |
+| Robot Position           |                                 |       |            | /robot_1/state/ground_truth |
+| Robot Orientation        |                                 |       |            | /robot_1/state/ground_truth |
 | Foot Position            | Not Yet Implemented             |       |            | ??? |
 | Foot Velocity            | Not Yet Implemented             |       |            | ??? |
-| Ground Reaction Forces   | quad_simulator/gazebo_scripts/src/contact_state_publisher.cpp  | World Frame (C) |           | /robot_1/state/grfs         |
+| Ground Reaction Forces   | quad_simulator/gazebo_scripts/src/contact_state_publisher.cpp  | World Frame | Newtons | /robot_1/state/grfs         |
 
-To show strength of evidence, we have multiple levels as outlined below:
-- C (Comment in file)
-- D (Documentation)
-- V (Verified directy by ourselves, through some test)
-- 
+#### Justification for Frames and Units
+
+
+
+Ground Reaction Forces:
+
+- "quad_simulator/gazebo_scripts/src/contact_state_publisher.cpp" specified that they rotate the forces into the world frame.
+- Gazebo uses ODE, and this link specifies that they use SI units (https://ode.org/wiki/index.php/FAQ#What_units_should_I_use_with_ODE.3F). Newtons is the official unit for SI (https://en.wikipedia.org/wiki/International_System_of_Units).
+ 
 ### Debugging
 
 If you have any issues with the simulator, closing all terminal tabs and restarting has been found to resolve some problems. 

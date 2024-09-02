@@ -110,7 +110,10 @@ These following websites have been useful for determining how Gazebo and Quad-SD
 - Gazebo ROS Plugin Tutorial - Also contains ROS Plugin for IMU (https://classic.gazebosim.org/tutorials?tut=ros_gzplugins)
 - Sensor Noise models (https://classic.gazebosim.org/tutorials?tut=sensor_noise#Introduction)
 
-### API
+### API (Version 11)
+- Gazebo API Reference (https://osrf-distributions.s3.amazonaws.com/gazebo/api/11.0.0/index.html)
+
+### API (Unknown Version)
 - Gazebo API Reference - Great for understanding Gazebo Sensor implementations, functions, etc. (https://osrf-distributions.s3.amazonaws.com/gazebo/api/dev/index.html)
 - Contact Sensor Class Reference (https://osrf-distributions.s3.amazonaws.com/gazebo/api/dev/classgazebo_1_1sensors_1_1ContactSensor.html)
 - Joint Class Reference (https://osrf-distributions.s3.amazonaws.com/gazebo/api/dev/classgazebo_1_1physics_1_1Joint.html#a85f6b25f1d0d6451a84875c18c57535d)

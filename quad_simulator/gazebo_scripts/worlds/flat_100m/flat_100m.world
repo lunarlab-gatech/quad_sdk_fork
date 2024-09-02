@@ -23,14 +23,14 @@
         <visual name="visual">
           <geometry>
             <mesh>
-              <uri>model:///flat_100m/flat_100m.stl</uri>
+              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat_100m/flat_100m.stl</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>model:///flat_100m/flat_100m.stl</uri>
+              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat_100m/flat_100m.stl</uri>
             </mesh>
           </geometry>
           <surface>

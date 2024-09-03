@@ -1,13 +1,14 @@
 <sdf version='1.6'>
   <world name='default'>
     <physics type="ode">
-      <max_step_size>0.001</max_step_size>
-      <real_time_update_rate>200</real_time_update_rate>
-      <ode>
-        <solver>
-          <iters>300</iters>
-        </solver>
-      </ode>
+    <max_step_size>0.001</max_step_size>
+    <real_time_factor>1</real_time_factor>
+    <real_time_update_rate>1000</real_time_update_rate>
+        <ode>
+            <solver> 
+              <iters>300</iters> 
+            </solver>  
+        </ode>
     </physics>
     <scene>
       <shadows>false</shadows>
@@ -17,27 +18,23 @@
       <uri>model://custom_sun</uri>
     </include>
     <model name="mesh_terrain">
-      <pose>-2 -2 -0.1 0 0 0</pose>
+      <pose>-2 -2 -0.1  0 0 0</pose>
       <static>true</static>
       <link name="body">
         <visual name="visual">
           <geometry>
-            <mesh>
-              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat_100m/flat_100m.stl</uri>
-            </mesh>
+            <mesh><uri>model:///slope_20_scaled10/slope_20_scaled10.stl</uri></mesh>
           </geometry>
         </visual>
         <collision name="collision">
           <geometry>
-            <mesh>
-              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat_100m/flat_100m.stl</uri>
-            </mesh>
+            <mesh><uri>model:///slope_20_scaled10/slope_20_scaled10.stl</uri></mesh>
           </geometry>
           <surface>
             <friction>
               <ode>
-                <mu>50</mu>
-                <mu2>50</mu2>
+                <mu>100</mu>
+                <mu2>100</mu2>
               </ode>
             </friction>
           </surface>

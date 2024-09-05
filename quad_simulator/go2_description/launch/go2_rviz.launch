@@ -2,14 +2,13 @@
 
     <arg name="user_debug" default="false"/>
     
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find go2_description)/xacro/robot.xacro'
-            DEBUG:=$(arg user_debug)"/>
-    
+    <param name="robot_description"  textfile="$(find go2_description)/urdf/go2_description.urdf" />
+
     <!-- for higher robot_state_publisher average rate-->
     <!-- <param name="rate" value="1000"/> -->
 
     <!-- send fake joint values -->
-    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui">
         <param name="use_gui" value="TRUE"/>
     </node>
 

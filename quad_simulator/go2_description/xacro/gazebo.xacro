@@ -3,36 +3,33 @@
     <!-- ros_control plugin -->
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-            <robotNamespace>/go2</robotNamespace>
+            <robotNamespace>/go2_gazebo</robotNamespace>
             <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
         </plugin>
-        <plugin filename="libground_truth_estimator.so" name="ground_truth_estimator">
-            <updateRateHZ>500.0</updateRateHZ>
-        </plugin>
     </gazebo>
+
     <!-- Show the trajectory of trunk center. -->
-    <!-- <gazebo>
+    <!--gazebo>
         <plugin name="3dplot" filename="libLinkPlot3DPlugin.so">
             <frequency>10</frequency>
             <plot>
-                <link>body</link>
+                <link>base</link>
                 <pose>0 0 0 0 0 0</pose>
                 <material>Gazebo/Yellow</material>
             </plot>
         </plugin>
-    </gazebo> -->
+    </gazebo-->
 
     <!-- Show the trajectory of foot. You can add another trajectory about another foot. -->
-    <!-- <gazebo>
+     <gazebo>
         <plugin name="3dplot" filename="libLinkPlot3DPlugin.so">
             <frequency>100</frequency>
             <plot>
                 <link>FL_foot</link>
                 <pose>0 0 0 0 0 0</pose>
-                <material>Gazebo/Green</material>
             </plot>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 
     <gazebo>
         <plugin filename="libgazebo_ros_force.so" name="gazebo_ros_force">
@@ -61,8 +58,14 @@
         </sensor>
     </gazebo>
 
+
+
+
+
+
+
     <!-- Foot contacts. -->
-    <!-- <gazebo reference="lower0">
+    <gazebo reference="FR_calf">
         <sensor name="FR_foot_contact" type="contact">
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
@@ -71,7 +74,7 @@
         </contact>
         </sensor>
     </gazebo>
-    <gazebo reference="lower1">
+    <gazebo reference="FL_calf">
         <sensor name="FL_foot_contact" type="contact">
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
@@ -80,7 +83,7 @@
         </contact>
         </sensor>
     </gazebo>
-    <gazebo reference="lower2">
+    <gazebo reference="RR_calf">
         <sensor name="RR_foot_contact" type="contact">
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
@@ -89,7 +92,7 @@
         </contact>
         </sensor>
     </gazebo>
-    <gazebo reference="lower3">
+    <gazebo reference="RL_calf">
         <sensor name="RL_foot_contact" type="contact">
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
@@ -97,228 +100,158 @@
             <collision>RL_calf_fixed_joint_lump__RL_foot_collision_1</collision>
         </contact>
         </sensor>
-    </gazebo> -->
-    <gazebo reference="toe0">
-        <sensor name="toe0_contact" type="contact">
-            <plugin name="toe0_plugin" filename="libgazebo_ros_bumper.so">
-                <alwaysOn>true</alwaysOn>
-                <updateRate>500</updateRate>
-                <bumperTopicName>gazebo/toe0_contact_state</bumperTopicName>
-                <frameName>world</frameName>
-            </plugin>
-            <contact>
-                <collision>toe0_collision</collision>
-            </contact>
-            <update_rate>500</update_rate>
-        </sensor>
-    </gazebo>
-    <gazebo reference="toe1">
-        <sensor name="toe1_contact" type="contact">
-            <plugin name="toe1_plugin" filename="libgazebo_ros_bumper.so">
-                <alwaysOn>true</alwaysOn>
-                <updateRate>500</updateRate>
-                <bumperTopicName>gazebo/toe1_contact_state</bumperTopicName>
-                <frameName>world</frameName>
-            </plugin>
-            <contact>
-                <collision>toe1_collision</collision>
-            </contact>
-            <update_rate>500</update_rate>
-        </sensor>
-    </gazebo>
-    <gazebo reference="toe2">
-        <sensor name="toe2_contact" type="contact">
-            <plugin name="toe2_plugin" filename="libgazebo_ros_bumper.so">
-                <alwaysOn>true</alwaysOn>
-                <updateRate>500</updateRate>
-                <bumperTopicName>gazebo/toe2_contact_state</bumperTopicName>
-                <frameName>world</frameName>
-            </plugin>
-            <contact>
-                <collision>toe2_collision</collision>
-            </contact>
-            <update_rate>500</update_rate>
-        </sensor>
-    </gazebo>
-    <gazebo reference="toe3">
-        <sensor name="toe3_contact" type="contact">
-            <plugin name="toe3_plugin" filename="libgazebo_ros_bumper.so">
-                <alwaysOn>true</alwaysOn>
-                <updateRate>500</updateRate>
-                <bumperTopicName>gazebo/toe3_contact_state</bumperTopicName>
-                <frameName>world</frameName>
-            </plugin>
-            <contact>
-                <collision>toe3_collision</collision>
-            </contact>
-            <update_rate>500</update_rate>
-        </sensor>
     </gazebo>
 
     <!-- Visualization of Foot contacts. -->
-    <!-- <gazebo reference="toe0">
+    <gazebo reference="FR_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
                 <topicName>FR_foot_contact</topicName>
             </plugin>
         </visual>
     </gazebo>
-    <gazebo reference="toe1">
+    <gazebo reference="FL_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
                 <topicName>FL_foot_contact</topicName>
             </plugin>
         </visual>
     </gazebo>
-    <gazebo reference="toe2">
+    <gazebo reference="RR_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
                 <topicName>RR_foot_contact</topicName>
             </plugin>
         </visual>
     </gazebo>
-    <gazebo reference="toe3">
+    <gazebo reference="RL_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
                 <topicName>RL_foot_contact</topicName>
             </plugin>
         </visual>
-    </gazebo> -->
+    </gazebo>
 
-    <gazebo reference="body">
-        <material>Gazebo/Green</material>
+    <gazebo reference="base">
         <turnGravityOff>false</turnGravityOff>
     </gazebo>
 
     <gazebo reference="trunk">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
     </gazebo>
 
     <gazebo reference="stick_link">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/White</material>
     </gazebo>
 
     <gazebo reference="imu_link">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/Red</material>
     </gazebo>
 
     <!-- FL leg -->
-    <gazebo reference="hip0">
+    <gazebo reference="FL_hip">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
-    <gazebo reference="upper0">
-        <mu1>0.2</mu1>
-        <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
-    </gazebo>
-    <gazebo reference="lower0">
-        <mu1>0.2</mu1>
-        <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
-    </gazebo>
-    <gazebo reference="toe0">
-        <mu1>0.6</mu1>
-        <mu2>0.6</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
-    </gazebo>
 
-    <!-- RL leg -->
-    <gazebo reference="hip1">
+    </gazebo>
+    <gazebo reference="FL_thigh">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
     </gazebo>
-    <gazebo reference="upper1">
+    <gazebo reference="FL_calf">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
+        <self_collide>1</self_collide>
     </gazebo>
-    <gazebo reference="lower1">
-        <mu1>0.2</mu1>
-        <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
-    </gazebo>
-    <gazebo reference="toe1">
+    <gazebo reference="FL_foot">
         <mu1>0.6</mu1>
         <mu2>0.6</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
     </gazebo>
 
     <!-- FR leg -->
-    <gazebo reference="hip2">
+    <gazebo reference="FR_hip">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
     </gazebo>
-    <gazebo reference="upper2">
+    <gazebo reference="FR_thigh">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
     </gazebo>
-    <gazebo reference="lower2">
+    <gazebo reference="FR_calf">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
+        <self_collide>1</self_collide>
     </gazebo>
-    <gazebo reference="toe2">
+    <gazebo reference="FR_foot">
         <mu1>0.6</mu1>
         <mu2>0.6</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
+    </gazebo>
+
+    <!-- RL leg -->
+    <gazebo reference="RL_hip">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+    </gazebo>
+    <gazebo reference="RL_thigh">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
+    </gazebo>
+    <gazebo reference="RL_calf">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>1</self_collide>
+    </gazebo>
+    <gazebo reference="RL_foot">
+        <mu1>0.6</mu1>
+        <mu2>0.6</mu2>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
     </gazebo>
 
     <!-- RR leg -->
-    <gazebo reference="hip3">
+    <gazebo reference="RR_hip">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
     </gazebo>
-    <gazebo reference="upper3">
+    <gazebo reference="RR_thigh">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
     </gazebo>
-    <gazebo reference="lower3">
+    <gazebo reference="RR_calf">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <self_collide>0</self_collide>
+        <self_collide>1</self_collide>
     </gazebo>
-    <gazebo reference="toe3">
+    <gazebo reference="RR_foot">
         <mu1>0.6</mu1>
         <mu2>0.6</mu2>
-        <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
-        <kp value="1000000.0"/>
-        <kd value="1.0"/>
+        <self_collide>1</self_collide>
+        <kp  value="1000000.0"/>
+        <kd  value="1.0"/>
     </gazebo>
 
 </robot>

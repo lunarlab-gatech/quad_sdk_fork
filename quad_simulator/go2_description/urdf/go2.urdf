@@ -53,15 +53,15 @@
         </plugin>
     </gazebo-->
   <!-- Show the trajectory of foot. You can add another trajectory about another foot. -->
-  <gazebo>
-    <plugin filename="libLinkPlot3DPlugin.so" name="3dplot">
-      <frequency>100</frequency>
-      <plot>
-        <link>FL_foot</link>
-        <pose>0 0 0 0 0 0</pose>
-      </plot>
-    </plugin>
-  </gazebo>
+  <!-- <gazebo>
+        <plugin name="3dplot" filename="libLinkPlot3DPlugin.so">
+            <frequency>100</frequency>
+            <plot>
+                <link>FL_foot</link>
+                <pose>0 0 0 0 0 0</pose>
+            </plot>
+        </plugin>
+    </gazebo> -->
   <gazebo>
     <plugin filename="libgazebo_ros_force.so" name="gazebo_ros_force">
       <bodyName>trunk</bodyName>
@@ -145,34 +145,6 @@
     </sensor>
   </gazebo>
   <!-- Visualization of Foot contacts. -->
-  <!-- <gazebo reference="FR_foot">
-        <visual>
-            <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>FR_foot_contact</topicName>
-            </plugin>
-        </visual>
-    </gazebo>
-    <gazebo reference="FL_foot">
-        <visual>
-            <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>FL_foot_contact</topicName>
-            </plugin>
-        </visual>
-    </gazebo>
-    <gazebo reference="RR_foot">
-        <visual>
-            <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>RR_foot_contact</topicName>
-            </plugin>
-        </visual>
-    </gazebo>
-    <gazebo reference="RL_foot">
-        <visual>
-            <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>RL_foot_contact</topicName>
-            </plugin>
-        </visual>
-    </gazebo> -->
   <gazebo reference="body">
     <turnGravityOff>false</turnGravityOff>
   </gazebo>

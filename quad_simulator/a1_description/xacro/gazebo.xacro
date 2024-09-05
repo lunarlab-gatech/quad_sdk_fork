@@ -62,42 +62,6 @@
     </gazebo>
 
     <!-- Foot contacts. -->
-    <!-- <gazebo reference="lower0">
-        <sensor name="FR_foot_contact" type="contact">
-        <update_rate>100</update_rate>
-        <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
-        <contact>
-            <collision>FR_calf_fixed_joint_lump__FR_foot_collision_1</collision>
-        </contact>
-        </sensor>
-    </gazebo>
-    <gazebo reference="lower1">
-        <sensor name="FL_foot_contact" type="contact">
-        <update_rate>100</update_rate>
-        <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
-        <contact>
-            <collision>FL_calf_fixed_joint_lump__FL_foot_collision_1</collision>
-        </contact>
-        </sensor>
-    </gazebo>
-    <gazebo reference="lower2">
-        <sensor name="RR_foot_contact" type="contact">
-        <update_rate>100</update_rate>
-        <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
-        <contact>
-            <collision>RR_calf_fixed_joint_lump__RR_foot_collision_1</collision>
-        </contact>
-        </sensor>
-    </gazebo>
-    <gazebo reference="lower3">
-        <sensor name="RL_foot_contact" type="contact">
-        <update_rate>100</update_rate>
-        <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
-        <contact>
-            <collision>RL_calf_fixed_joint_lump__RL_foot_collision_1</collision>
-        </contact>
-        </sensor>
-    </gazebo> -->
     <gazebo reference="toe0">
         <sensor name="toe0_contact" type="contact">
             <plugin name="toe0_plugin" filename="libgazebo_ros_bumper.so">

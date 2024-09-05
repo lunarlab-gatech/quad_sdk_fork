@@ -4,36 +4,11 @@
 
     <xacro:include filename="$(find go2_description)/xacro/transmission.xacro"/>
 
-    <xacro:macro name="leg" params="name mirror mirror_dae front_hind front_hind_dae">
+    <xacro:macro name="leg" params="suffix mirror mirror_dae front_hind front_hind_dae 
+                                hipJointName kneeJointName abductionJointName *origin">
 
-        <joint name="${name}_hip_joint" type="revolute">
-            <xacro:if value="${(mirror_dae == False) and (front_hind_dae == True)}">
-                <origin rpy="0 0 0" xyz="${leg_offset_x} ${-leg_offset_y} 0"/>
-            </xacro:if>
-            <xacro:if value="${(mirror_dae == True) and (front_hind_dae == True)}">
-                <origin rpy="0 0 0" xyz="${leg_offset_x} ${leg_offset_y} 0"/>
-            </xacro:if>
-            <xacro:if value="${(mirror_dae == False) and (front_hind_dae == False)}">
-                <origin rpy="0 0 0" xyz="${-leg_offset_x} ${-leg_offset_y} 0"/>
-            </xacro:if>
-            <xacro:if value="${(mirror_dae == True) and (front_hind_dae == False)}">
-                <origin rpy="0 0 0" xyz="${-leg_offset_x} ${leg_offset_y} 0"/>
-            </xacro:if>
-            <parent link="trunk"/>
-            <child link="${name}_hip"/>
-            <axis xyz="1 0 0"/>
-            <dynamics damping="${damping}" friction="${friction}"/>
-            <xacro:if value="${(mirror_dae == True)}">
-                <limit effort="${hip_torque_max}" velocity="${hip_velocity_max}" lower="${hip_position_min}" upper="${hip_position_max}"/>
-            </xacro:if>
-            <xacro:if value="${(mirror_dae == False)}">
-                <limit effort="${hip_torque_max}" velocity="${hip_velocity_max}" lower="${-hip_position_max}" upper="${-hip_position_min}"/>
-            </xacro:if>            
-        </joint>
-
-
-        <link name="${name}_hip">
-            <visual>
+        <link name="hip${suffix}">
+            <visual name="hip${suffix}_visual">
                 <xacro:if value="${(mirror_dae == True) and (front_hind_dae == True)}">
                     <origin rpy="0 0 0" xyz="0 0 0"/>
                 </xacro:if>
@@ -67,18 +42,49 @@
             </inertial>
         </link>
 
-        <joint name="${name}_thigh_joint" type="revolute">
-            <origin rpy="0 0 0" xyz="0 ${thigh_offset*mirror} 0"/>
-            <parent link="${name}_hip"/>
-            <child link="${name}_thigh"/>
-            <axis xyz="0 1 0"/>
+        <joint name="${abductionJointName}" type="revolute">
+            <xacro:if value="${(mirror_dae == False) and (front_hind_dae == True)}">
+                <origin rpy="0 0 0" xyz="${leg_offset_x} ${-leg_offset_y} 0"/>
+            </xacro:if>
+            <xacro:if value="${(mirror_dae == True) and (front_hind_dae == True)}">
+                <origin rpy="0 0 0" xyz="${leg_offset_x} ${leg_offset_y} 0"/>
+            </xacro:if>
+            <xacro:if value="${(mirror_dae == False) and (front_hind_dae == False)}">
+                <origin rpy="0 0 0" xyz="${-leg_offset_x} ${-leg_offset_y} 0"/>
+            </xacro:if>
+            <xacro:if value="${(mirror_dae == True) and (front_hind_dae == False)}">
+                <origin rpy="0 0 0" xyz="${-leg_offset_x} ${leg_offset_y} 0"/>
+            </xacro:if>
+            <parent link="trunk"/>
+            <child link="hip${suffix}"/>
+            <axis xyz="1 0 0"/>
             <dynamics damping="${damping}" friction="${friction}"/>
-            <limit effort="${thigh_torque_max}" velocity="${thigh_velocity_max}" lower="${thigh_position_min}" upper="${thigh_position_max}"/>
+            <xacro:if value="${(mirror_dae == True)}">
+                <limit effort="${hip_torque_max}" velocity="${hip_velocity_max}" lower="${hip_position_min}" upper="${hip_position_max}"/>
+            </xacro:if>
+            <xacro:if value="${(mirror_dae == False)}">
+                <limit effort="${hip_torque_max}" velocity="${hip_velocity_max}" lower="${-hip_position_max}" upper="${-hip_position_min}"/>
+            </xacro:if>            
         </joint>
 
+        <!-- this link is only for collision -->
+        <link name="thigh_shoulder${suffix}">
+            <collision>
+                <origin rpy="${PI/2.0} 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <cylinder length="${thigh_shoulder_length}" radius="${thigh_shoulder_radius}"/>
+                </geometry>
+            </collision>
+        </link>
 
-        <link name="${name}_thigh">
-            <visual>
+        <joint name="hip${suffix}_fixed" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${(thigh_shoulder_length/2.0+hip_offset)*mirror} 0"/>
+            <parent link="hip${suffix}"/>
+            <child link="thigh_shoulder${suffix}"/>
+        </joint>
+
+        <link name="upper${suffix}">
+            <visual name="upper${suffix}_visual">
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
                     <xacro:if value="${mirror_dae == True}">
@@ -90,7 +96,7 @@
                 </geometry>
                 <!-- <material name="orange"/> -->
             </visual>
-            <collision>
+            <collision name="upper${suffix}_collision">
                 <origin rpy="0 ${PI/2.0} 0" xyz="0 0 ${-thigh_length/2.0}"/>
                 <geometry>
                     <box size="${thigh_length} ${thigh_width} ${thigh_height}"/>
@@ -106,26 +112,24 @@
             </inertial>
         </link>
 
-
-        <joint name="${name}_calf_joint" type="revolute">
-            <origin rpy="0 0 0" xyz="0 0 ${-thigh_length}"/>
-            <parent link="${name}_thigh"/>
-            <child link="${name}_calf"/>
+        <joint name="${hipJointName}" type="revolute">
+            <origin rpy="0 0 0" xyz="0 ${thigh_offset*mirror} 0"/>
+            <parent link="hip${suffix}"/>
+            <child link="upper${suffix}"/>
             <axis xyz="0 1 0"/>
             <dynamics damping="${damping}" friction="${friction}"/>
-            <limit effort="${calf_torque_max}" velocity="${calf_velocity_max}" lower="${calf_position_min}" upper="${calf_position_max}"/>
+            <limit effort="${thigh_torque_max}" velocity="${thigh_velocity_max}" lower="${thigh_position_min}" upper="${thigh_position_max}"/>
         </joint>
 
-
-        <link name="${name}_calf">
-            <visual>
+        <link name="lower${suffix}">
+            <visual name="lower${suffix}_visual">
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
                     <mesh filename="package://go2_description/meshes/calf.dae" scale="1 1 1"/>
                 </geometry>
                 <!-- <material name="orange"/> -->
             </visual>
-            <collision>
+            <collision name="lower${suffix}_collision">
                 <origin rpy="0 ${PI/2.0} 0" xyz="0 0 ${-calf_length/2.0}"/>
                 <geometry>
                     <box size="${calf_length} ${calf_width} ${calf_height}"/>
@@ -141,26 +145,56 @@
             </inertial>
         </link>
 
-
-        <joint name="${name}_foot_fixed" type="fixed">0
-            <origin rpy="0 0 0" xyz="0 0 ${-(calf_length)}"/>
-            <parent link="${name}_calf"/>
-            <child link="${name}_foot"/>
+         <joint name="${kneeJointName}" type="revolute">
+            <origin rpy="0 0 0" xyz="0 0 ${-thigh_length}"/>
+            <parent link="upper${suffix}"/>
+            <child link="lower${suffix}"/>
+            <axis xyz="0 1 0"/>
+            <dynamics damping="${damping}" friction="${friction}"/>
+            <limit effort="${calf_torque_max}" velocity="${calf_velocity_max}" lower="${calf_position_min}" upper="${calf_position_max}"/>
         </joint>
 
-        <link name="${name}_foot">
-            <visual>
+        <link name="toe${suffix}">
+            <visual name="toe${suffix}_visual">
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
                     <sphere radius="${foot_radius-0.01}"/>
                 </geometry>
                 <!-- <material name="orange"/> -->
             </visual>
-            <collision>
+            <collision name="toe${suffix}_collision">
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
                     <sphere radius="${foot_radius}"/>
                 </geometry>
+                <surface>
+                <bounce>
+                    <restitution_coefficient>0</restitution_coefficient>
+                    <threshold>1e+06</threshold>
+                </bounce>
+                <friction>
+                    <ode>
+                        <mu>${toe_friction}</mu>
+                        <mu2>${toe_lateral_friction}</mu2>
+                    </ode>
+                    <bullet>
+                        <rolling_friction>0.3</rolling_friction>
+                        <friction2>50</friction2>
+                    </bullet>
+                </friction>
+                <contact>
+                    <ode>
+                        <kp>${toe_stiffness}</kp>
+                        <kd>${toe_damping}</kd>
+                    </ode>
+                    <bullet>
+                        <kp>${toe_stiffness}</kp>
+                        <kd>${toe_damping}</kd>
+                        <split_impulse>1</split_impulse>
+                        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                    </bullet>
+                </contact>
+            </surface>
             </collision>
             <inertial>
                 <mass value="${foot_mass}"/>
@@ -171,6 +205,12 @@
             </inertial>
         </link>
 
-        <xacro:leg_transmission name="${name}"/>
+        <joint name="jtoe${suffix}" type="fixed">0
+            <origin rpy="0 0 0" xyz="0 0 ${-(calf_length)}"/>
+            <parent link="lower${suffix}"/>
+            <child link="toe${suffix}"/>
+        </joint>
+
+        <xacro:leg_transmission  hipJointName="${hipJointName}" kneeJointName="${kneeJointName}" abductionJointName="${abductionJointName}"/>
     </xacro:macro>
 </robot>

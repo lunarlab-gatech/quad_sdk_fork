@@ -21,6 +21,10 @@
     <xacro:property name="foot_radius" value="0.02"/>
     <xacro:property name="stick_radius" value="0.01"/>
     <xacro:property name="stick_length" value="0.2"/>
+    <xacro:property name="toe_friction" value="0.2"/>
+    <xacro:property name="toe_lateral_friction" value="0.2"/>
+    <xacro:property name="toe_stiffness" value="30000.0"/>
+    <xacro:property name="toe_damping" value="1000.0"/>
 
     <!-- kinematic value -->
     <xacro:property name="thigh_offset" value="0.0955"/>

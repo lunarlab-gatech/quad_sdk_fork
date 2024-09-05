@@ -2,40 +2,40 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="leg_transmission" params="name">
+    <xacro:macro name="leg_transmission" params="hipJointName kneeJointName abductionJointName">
 
-        <transmission name="${name}_hip_tran">
-            <type>transmission_interface/SimpleTransmission</type>
-            <joint name="${name}_hip_joint">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            </joint>
-            <actuator name="${name}_hip_motor">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-            </actuator>
-        </transmission>
+        <transmission name="transmission_${abductionJointName}">
+    		<type>transmission_interface/SimpleTransmission</type>
+    		<joint name="${abductionJointName}">
+      			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    		</joint>
+    		<actuator name="motor_${abductionJointName}">
+      			<hardwareInterface>EffortJointInterface</hardwareInterface>
+      			<mechanicalReduction>1</mechanicalReduction>
+    		</actuator>
+  		</transmission>
 
-        <transmission name="${name}_thigh_tran">
-            <type>transmission_interface/SimpleTransmission</type>
-            <joint name="${name}_thigh_joint">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            </joint>
-            <actuator name="${name}_thigh_motor">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-            </actuator>
-        </transmission>
+        <transmission name="transmission_${hipJointName}">
+    		<type>transmission_interface/SimpleTransmission</type>
+    		<joint name="${hipJointName}">
+      			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    		</joint>
+    		<actuator name="motor_${hipJointName}">
+      			<hardwareInterface>EffortJointInterface</hardwareInterface>
+      			<mechanicalReduction>1</mechanicalReduction>
+    		</actuator>
+  		</transmission>
 
-        <transmission name="${name}_calf_tran">
-            <type>transmission_interface/SimpleTransmission</type>
-            <joint name="${name}_calf_joint">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            </joint>
-            <actuator name="${name}_calf_motor">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-            </actuator>
-        </transmission>
+        <transmission name="transmission_${kneeJointName}">
+    		<type>transmission_interface/SimpleTransmission</type>
+    		<joint name="${kneeJointName}">
+      			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    		</joint>
+    		<actuator name="motor_${kneeJointName}">
+      			<hardwareInterface>EffortJointInterface</hardwareInterface>
+      			<mechanicalReduction>1</mechanicalReduction>
+    		</actuator>
+  		</transmission>
 
     </xacro:macro>
 

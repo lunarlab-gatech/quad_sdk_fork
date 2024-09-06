@@ -34,34 +34,14 @@
   <!-- ros_control plugin -->
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-      <robotNamespace>/go2_gazebo</robotNamespace>
+      <robotNamespace>/go2</robotNamespace>
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
     <plugin filename="libground_truth_estimator.so" name="ground_truth_estimator">
       <updateRateHZ>500.0</updateRateHZ>
     </plugin>
   </gazebo>
-  <!-- Show the trajectory of trunk center. -->
-  <!--gazebo>
-        <plugin name="3dplot" filename="libLinkPlot3DPlugin.so">
-            <frequency>10</frequency>
-            <plot>
-                <link>body</link>
-                <pose>0 0 0 0 0 0</pose>
-                <material>Gazebo/Yellow</material>
-            </plot>
-        </plugin>
-    </gazebo-->
-  <!-- Show the trajectory of foot. You can add another trajectory about another foot. -->
-  <!-- <gazebo>
-        <plugin name="3dplot" filename="libLinkPlot3DPlugin.so">
-            <frequency>100</frequency>
-            <plot>
-                <link>FL_foot</link>
-                <pose>0 0 0 0 0 0</pose>
-            </plot>
-        </plugin>
-    </gazebo> -->
+  
   <gazebo>
     <plugin filename="libgazebo_ros_force.so" name="gazebo_ros_force">
       <bodyName>trunk</bodyName>
@@ -144,8 +124,9 @@
       <update_rate>500</update_rate>
     </sensor>
   </gazebo>
-  <!-- Visualization of Foot contacts. -->
+  
   <gazebo reference="body">
+    <material>Gazebo/Green</material>
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <gazebo reference="trunk">
@@ -157,20 +138,24 @@
   <gazebo reference="stick_link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
   </gazebo>
   <gazebo reference="imu_link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
+    <material>Gazebo/Red</material>
   </gazebo>
   <!-- FL leg -->
   <gazebo reference="hip0">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
   </gazebo>
   <gazebo reference="upper0">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -183,6 +168,7 @@
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -190,11 +176,13 @@
   <gazebo reference="hip1">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
   </gazebo>
   <gazebo reference="upper1">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -207,6 +195,7 @@
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -214,11 +203,13 @@
   <gazebo reference="hip2">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
   </gazebo>
   <gazebo reference="upper2">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -231,6 +222,7 @@
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -238,11 +230,13 @@
   <gazebo reference="hip3">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
   </gazebo>
   <gazebo reference="upper3">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -255,6 +249,7 @@
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
@@ -279,7 +274,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/trunk.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="body_collision">
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -309,7 +304,7 @@
       <geometry>
         <box size="0.001 0.001 0.001"/>
       </geometry>
-      <!-- <material name="red"/> -->
+      <material name="red"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -324,7 +319,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/hip.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0.0955 0"/>
@@ -366,7 +361,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/thigh.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="upper0_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -394,7 +389,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/calf.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="lower0_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -422,7 +417,7 @@
       <geometry>
         <sphere radius="0.01"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="toe0_collision">
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -464,8 +459,6 @@
     </inertial>
   </link>
   <joint name="jtoe0" type="fixed">
-    0
-            
     <origin rpy="0 0 0" xyz="0 0 -0.213"/>
     <parent link="lower0"/>
     <child link="toe0"/>
@@ -506,7 +499,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/hip.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0.0955 0"/>
@@ -548,7 +541,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/thigh.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="upper1_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -576,7 +569,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/calf.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="lower1_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -604,7 +597,7 @@
       <geometry>
         <sphere radius="0.01"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="toe1_collision">
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -646,8 +639,6 @@
     </inertial>
   </link>
   <joint name="jtoe1" type="fixed">
-    0
-            
     <origin rpy="0 0 0" xyz="0 0 -0.213"/>
     <parent link="lower1"/>
     <child link="toe1"/>
@@ -688,7 +679,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/hip.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 -0.0955 0"/>
@@ -730,7 +721,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/thigh_mirror.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="upper2_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -758,7 +749,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/calf.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="lower2_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -786,7 +777,7 @@
       <geometry>
         <sphere radius="0.01"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="toe2_collision">
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -828,8 +819,6 @@
     </inertial>
   </link>
   <joint name="jtoe2" type="fixed">
-    0
-            
     <origin rpy="0 0 0" xyz="0 0 -0.213"/>
     <parent link="lower2"/>
     <child link="toe2"/>
@@ -870,7 +859,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/hip.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 -0.0955 0"/>
@@ -912,7 +901,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/thigh_mirror.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="upper3_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -940,7 +929,7 @@
       <geometry>
         <mesh filename="package://go2_description/meshes/calf.dae" scale="1 1 1"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="lower3_collision">
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.1065"/>
@@ -968,7 +957,7 @@
       <geometry>
         <sphere radius="0.01"/>
       </geometry>
-      <!-- <material name="orange"/> -->
+      <material name="orange"/>
     </visual>
     <collision name="toe3_collision">
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -1010,8 +999,6 @@
     </inertial>
   </link>
   <joint name="jtoe3" type="fixed">
-    0
-            
     <origin rpy="0 0 0" xyz="0 0 -0.213"/>
     <parent link="lower3"/>
     <child link="toe3"/>
@@ -1046,4 +1033,32 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
+  <gazebo reference='jtoe0'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference='jtoe1'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference='jtoe2'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference='jtoe3'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <!-- <gazebo reference='floating_base'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo> -->
+  <gazebo reference='hip0_fixed'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference='hip1_fixed'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference='hip2_fixed'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference='hip3_fixed'>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
 </robot>

@@ -151,7 +151,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://go2_description/meshes/hip.dae</uri>
+            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>

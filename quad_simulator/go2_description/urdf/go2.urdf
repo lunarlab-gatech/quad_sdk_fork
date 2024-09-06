@@ -495,7 +495,7 @@
   </transmission>
   <link name="hip1">
     <visual name="hip1_visual">
-      <origin rpy="0 3.141592653589793 0" xyz="0 0 0"/>
+      <origin rpy="0 3.05 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://go2_description/meshes/hip.dae" scale="1 1 1"/>
       </geometry>
@@ -675,7 +675,7 @@
   </transmission>
   <link name="hip2">
     <visual name="hip2_visual">
-      <origin rpy="3.141592653589793 0 0" xyz="0 0 0"/>
+      <origin rpy="3.05 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://go2_description/meshes/hip.dae" scale="1 1 1"/>
       </geometry>
@@ -855,7 +855,7 @@
   </transmission>
   <link name="hip3">
     <visual name="hip3_visual">
-      <origin rpy="3.141592653589793 3.141592653589793 0" xyz="0 0 0"/>
+      <origin rpy="3.05 3.05 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://go2_description/meshes/hip.dae" scale="1 1 1"/>
       </geometry>

@@ -147,7 +147,7 @@
         </surface>
       </collision>
       <visual name='hip2_visual_visual'>
-        <pose frame=''>0 0 0 3.14159 -0 0</pose>
+        <pose frame=''>0 0 0 3.05 -0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -460,7 +460,7 @@
         </surface>
       </collision>
       <visual name='hip3_visual_visual'>
-        <pose frame=''>0 0 0 -0 0 3.14159</pose>
+        <pose frame=''>0 0 0 -0 0 3.05</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -1086,7 +1086,7 @@
         </surface>
       </collision>
       <visual name='hip1_visual_visual'>
-        <pose frame=''>0 0 0 3.14159 0 3.14159</pose>
+        <pose frame=''>0 0 0 3.05 0 3.05</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>

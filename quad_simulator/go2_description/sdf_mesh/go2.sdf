@@ -1,5 +1,5 @@
-<sdf version='1.6'>
-  <model name='go2_description'>
+<sdf version='1.7'>
+  <model name='go2'>
     <link name='body'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
@@ -92,32 +92,28 @@
           </script>
         </material>
       </visual>
-      <velocity_decay/>
-      <velocity_decay/>
-      <velocity_decay/>
+      <gravity>1</gravity>
       <gravity>1</gravity>
       <sensor name='imu_sensor' type='imu'>
-        <always_on>true</always_on>
+        <always_on>1</always_on>
         <update_rate>1000</update_rate>
-        <visualize>true</visualize>
+        <visualize>1</visualize>
         <topic>__default_topic__</topic>
         <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
-          <topicName>state/imu</topicName>
+          <topicName>trunk_imu</topicName>
           <bodyName>imu_link</bodyName>
           <updateRateHZ>1000.0</updateRateHZ>
           <gaussianNoise>0.0</gaussianNoise>
           <xyzOffset>0 0 0</xyzOffset>
           <rpyOffset>0 0 0</rpyOffset>
           <frameName>imu_link</frameName>
-          <initialOrientationAsReference>false</initialOrientationAsReference>
         </plugin>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </sensor>
-      <gravity>1</gravity>
-      <velocity_decay/>
     </link>
+    
     <link name='hip2'>
-      <pose frame=''>0.1805 -0.047 0 0 -0 0</pose>
+      <pose relative_to='10'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>-0.0054 -0.00194 -0.000105 0 -0 0</pose>
         <mass>0.678</mass>
@@ -151,11 +147,11 @@
         </surface>
       </collision>
       <visual name='hip2_visual_visual'>
-        <pose frame=''>0 0 0 -3.14159 -0 0</pose>
+        <pose frame=''>0 0 0 3.14159 -0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/hip.dae</uri>
+            <uri>model://go2_description/meshes/hip.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -165,22 +161,21 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
     </link>
     <joint name='10' type='revolute'>
-      <child>hip2</child>
+      <pose relative_to='body'>0.1934 -0.0465 0 0 -0 0</pose>
       <parent>body</parent>
+      <child>hip2</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
-          <lower>-0.802851</lower>
-          <upper>0.802851</upper>
-          <effort>33.5</effort>
-          <velocity>21</velocity>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>23.7</effort>
+          <velocity>30.1</velocity>
         </limit>
         <dynamics>
           <damping>0</damping>
@@ -188,11 +183,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+
     <link name='upper2'>
-      <pose frame=''>0.1805 -0.1308 0 3.14159 1.57079 3.14159</pose>
+      <pose relative_to='4'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>-0.00374 0.0223 -0.0327 0 -0 0</pose>
         <mass>1.152</mass>
@@ -205,8 +200,8 @@
           <izz>0.00103</izz>
         </inertia>
       </inertial>
-      <collision name='upper2_collision_collision'>
-        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
+      <collision name='upper2_collision'>
+        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
         <geometry>
           <box>
             <size>0.213 0.0245 0.034</size>
@@ -242,19 +237,18 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
 
     <joint name='4' type='revolute'>
-      <child>upper2</child>
+      <pose relative_to='hip2'>0 -0.0955 0 0 -0 0</pose>
       <parent>hip2</parent>
+      <child>upper2</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 -1 0</xyz>
+        <xyz>0 1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -267,11 +261,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='lower2'>
-      <pose frame=''>-0.0195 -0.1308 -0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='5'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0.00548 -0.000975 -0.115 0 -0 0</pose>
         <mass>0.154</mass>
@@ -311,20 +305,14 @@
             <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
-        <material>
-          <script>
-            <uri>__default__</uri>
-            <name>__default__</name>
-          </script>
-        </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='5' type='revolute'>
-      <child>lower2</child>
+      <pose relative_to='upper2'>0 0 -0.213 0 -0 0</pose>
       <parent>upper2</parent>
+      <child>lower2</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
@@ -342,11 +330,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+
     <link name='toe2'>
-      <pose frame=''>0.1805 -0.1308 0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='jtoe2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.06</mass>
@@ -395,10 +383,9 @@
           </script>
         </material>
       </visual>
-      <velocity_decay/>
       <sensor name='toe2_contact' type='contact'>
         <plugin name='toe2_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>true</alwaysOn>
+          <alwaysOn>1</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe2_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -409,20 +396,20 @@
         </contact>
         <update_rate>500</update_rate>
       </sensor>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
+
     <joint name='jtoe2' type='fixed'>
-      <child>toe2</child>
+      <pose relative_to='lower2'>0 0 -0.213 0 -0 0</pose>
       <parent>lower2</parent>
+      <child>toe2</child>
       <axis>
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
         <xyz>0 0 1</xyz>
-        <use_parent_model_frame>0</use_parent_model_frame>
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
@@ -437,8 +424,9 @@
         </ode>
       </physics>
     </joint>
+    
     <link name='hip3'>
-      <pose frame=''>-0.1805 -0.047 0 0 -0 0</pose>
+      <pose relative_to='11'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0.0054 -0.00194 -0.000105 0 -0 0</pose>
         <mass>0.678</mass>
@@ -451,8 +439,8 @@
           <izz>0.000596</izz>
         </inertia>
       </inertial>
-      <collision name='hip3_collision_collision'>
-        <pose frame=''>0 0 0 1.5708 -0 0</pose>
+      <collision name='hip3_collision'>
+        <pose frame=''>0 -0.0955 0 1.5708 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.04</length>
@@ -472,7 +460,7 @@
         </surface>
       </collision>
       <visual name='hip3_visual_visual'>
-        <pose frame=''>0 0 0 0 -0 3.14159</pose>
+        <pose frame=''>0 0 0 -0 0 3.14159</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -486,12 +474,12 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
     </link>
+
     <joint name='11' type='revolute'>
-      <child>hip3</child>
+      <pose relative_to='body'>-0.1934 -0.0465 0 0 -0 0</pose>
       <parent>body</parent>
+      <child>hip3</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
@@ -509,11 +497,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='upper3'>
-      <pose frame=''>-0.1805 -0.1308 0 3.14159 1.57079 3.14159</pose>
+      <pose relative_to='6'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>-0.00374 0.0223 -0.0327 0 -0 0</pose>
         <mass>1.152</mass>
@@ -526,8 +514,8 @@
           <izz>0.00103</izz>
         </inertia>
       </inertial>
-      <collision name='upper3_collision_collision'>
-        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
+      <collision name='upper3_collision'>
+        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
         <geometry>
           <box>
             <size>0.213 0.0245 0.034</size>
@@ -563,18 +551,18 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='6' type='revolute'>
-      <child>upper3</child>
+      <pose relative_to='hip3'>0 -0.0955 0 0 -0 0</pose>
       <parent>hip3</parent>
+      <child>upper3</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 -1 0</xyz>
+        <xyz>0 1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -587,11 +575,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='lower3'>
-      <pose frame=''>-0.3805 -0.1308 -0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='7'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0.00548 -0.000975 -0.115 0 -0 0</pose>
         <mass>0.154</mass>
@@ -604,8 +592,8 @@
           <izz>3.29e-05</izz>
         </inertia>
       </inertial>
-      <collision name='lower3_collision_collision'>
-        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
+      <collision name='lower3_collision'>
+        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
         <geometry>
           <box>
             <size>0.213 0.016 0.016</size>
@@ -631,20 +619,14 @@
             <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
-        <material>
-          <script>
-            <uri>__default__</uri>
-            <name>__default__</name>
-          </script>
-        </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='7' type='revolute'>
-      <child>lower3</child>
+      <pose relative_to='upper3'>0 0 -0.213 0 -0 0</pose>
       <parent>upper3</parent>
+      <child>lower3</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
@@ -662,11 +644,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='toe3'>
-      <pose frame=''>-0.1805 -0.1308 0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='jtoe3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.06</mass>
@@ -715,10 +697,9 @@
           </script>
         </material>
       </visual>
-      <velocity_decay/>
       <sensor name='toe3_contact' type='contact'>
         <plugin name='toe3_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>true</alwaysOn>
+          <alwaysOn>1</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe3_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -729,20 +710,19 @@
         </contact>
         <update_rate>500</update_rate>
       </sensor>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='jtoe3' type='fixed'>
-      <child>toe3</child>
+      <pose relative_to='lower3'>0 0 -0.213 0 -0 0</pose>
       <parent>lower3</parent>
+      <child>toe3</child>
       <axis>
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
         <xyz>0 0 1</xyz>
-        <use_parent_model_frame>0</use_parent_model_frame>
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
@@ -757,8 +737,9 @@
         </ode>
       </physics>
     </joint>
+    
     <link name='hip0'>
-      <pose frame=''>0.1805 0.047 0 0 -0 0</pose>
+      <pose relative_to='8'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>-0.0054 0.00194 -0.000105 0 -0 0</pose>
         <mass>0.678</mass>
@@ -771,8 +752,8 @@
           <izz>0.000596</izz>
         </inertia>
       </inertial>
-      <collision name='hip0_collision_collision'>
-        <pose frame=''>0 0 0 1.5708 -0 0</pose>
+      <collision name='hip0_collision'>
+        <pose frame=''>0 0.0955 0 1.5708 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.04</length>
@@ -806,12 +787,12 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
     </link>
+
     <joint name='8' type='revolute'>
-      <child>hip0</child>
+      <pose relative_to='body'>0.1934 0.0465 0 0 -0 0</pose>
       <parent>body</parent>
+      <child>hip0</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
@@ -829,11 +810,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='upper0'>
-      <pose frame=''>0.1805 0.1308 0 3.14159 1.57079 3.14159</pose>
+      <pose relative_to='0'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>-0.00374 -0.0223 -0.0327 0 -0 0</pose>
         <mass>1.152</mass>
@@ -883,18 +864,18 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='0' type='revolute'>
-      <child>upper0</child>
+      <pose relative_to='hip0'>0 0.0955 0 0 -0 0</pose>
       <parent>hip0</parent>
+      <child>upper0</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 -1 0</xyz>
+        <xyz>0 1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -907,11 +888,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='lower0'>
-      <pose frame=''>-0.0195 0.1308 -0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0.00548 -0.000975 -0.115 0 -0 0</pose>
         <mass>0.154</mass>
@@ -924,8 +905,8 @@
           <izz>3.29e-05</izz>
         </inertia>
       </inertial>
-      <collision name='lower0_collision_collision'>
-        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
+      <collision name='lower0_collision'>
+        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
         <geometry>
           <box>
             <size>0.213 0.016 0.016</size>
@@ -951,23 +932,17 @@
             <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
-        <material>
-          <script>
-            <uri>__default__</uri>
-            <name>__default__</name>
-          </script>
-        </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='1' type='revolute'>
-      <child>lower0</child>
+      <pose relative_to='upper0'>0 0 -0.213 0 -0 0</pose>
       <parent>upper0</parent>
+      <child>lower0</child>
       <physics>
         <provide_feedback>true</provide_feedback>
-      </physics>
+      </physics2
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -982,11 +957,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='toe0'>
-      <pose frame=''>0.1805 0.1308 0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='jtoe0'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.06</mass>
@@ -1035,10 +1010,9 @@
           </script>
         </material>
       </visual>
-      <velocity_decay/>
       <sensor name='toe0_contact' type='contact'>
         <plugin name='toe0_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>true</alwaysOn>
+          <alwaysOn>1</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe0_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -1049,20 +1023,19 @@
         </contact>
         <update_rate>500</update_rate>
       </sensor>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='jtoe0' type='fixed'>
-      <child>toe0</child>
+      <pose relative_to='lower0'>0 0 -0.213 0 -0 0</pose>
       <parent>lower0</parent>
+      <child>toe0</child>
       <axis>
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
         <xyz>0 0 1</xyz>
-        <use_parent_model_frame>0</use_parent_model_frame>
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
@@ -1077,8 +1050,9 @@
         </ode>
       </physics>
     </joint>
+    
     <link name='hip1'>
-      <pose frame=''>-0.1805 0.047 0 0 -0 0</pose>
+      <pose relative_to='9'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0.0054 0.00194 -0.000105 0 -0 0</pose>
         <mass>0.678</mass>
@@ -1091,8 +1065,8 @@
           <izz>0.000596</izz>
         </inertia>
       </inertial>
-      <collision name='hip1_collision_collision'>
-        <pose frame=''>0 0 0 1.5708 -0 0</pose>
+      <collision name='hip1_collision'>
+        <pose frame=''>0 0.0955 0 1.5708 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.04</length>
@@ -1112,7 +1086,7 @@
         </surface>
       </collision>
       <visual name='hip1_visual_visual'>
-        <pose frame=''>0 0 0 3.14159 -0 3.14159</pose>
+        <pose frame=''>0 0 0 3.14159 0 3.14159</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -1126,12 +1100,12 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
     </link>
+
     <joint name='9' type='revolute'>
-      <child>hip1</child>
+      <pose relative_to='body'>-0.1934 0.0465 0 0 -0 0</pose>
       <parent>body</parent>
+      <child>hip1</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
@@ -1149,11 +1123,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='upper1'>
-      <pose frame=''>-0.1805 0.1308 0 3.14159 1.57079 3.14159</pose>
+      <pose relative_to='2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>-0.00374 -0.0223 -0.0327 0 -0 0</pose>
         <mass>1.152</mass>
@@ -1166,8 +1140,8 @@
           <izz>0.00103</izz>
         </inertia>
       </inertial>
-      <collision name='upper1_collision_collision'>
-        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
+      <collision name='upper1_collision'>
+        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
         <geometry>
           <box>
             <size>0.213 0.0245 0.034</size>
@@ -1203,18 +1177,18 @@
           </script>
         </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='2' type='revolute'>
-      <child>upper1</child>
+      <pose relative_to='hip1'>0 0.0955 0 0 -0 0</pose>
       <parent>hip1</parent>
+      <child>upper1</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 -1 0</xyz>
+        <xyz>0 1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -1227,11 +1201,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='lower1'>
-      <pose frame=''>-0.3805 0.1308 -0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0.00548 -0.000975 -0.115 0 -0 0</pose>
         <mass>0.154</mass>
@@ -1244,8 +1218,8 @@
           <izz>3.29e-05</izz>
         </inertia>
       </inertial>
-      <collision name='lower1_collision_collision'>
-        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
+      <collision name='lower1_collision'>
+        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
         <geometry>
           <box>
             <size>0.213 0.016 0.016</size>
@@ -1271,21 +1245,14 @@
             <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/go2_description/meshes/calf.dae</uri>
           </mesh>
         </geometry>
-        <material>
-          <script>
-            <uri>__default__</uri>
-            <name>__default__</name>
-          </script>
-        </material>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
 
     <joint name='3' type='revolute'>
-      <child>lower1</child>
+      <pose relative_to='upper1'>0 0 -0.213 0 -0 0</pose>
       <parent>upper1</parent>
+      <child>lower1</child>
       <physics>
         <provide_feedback>true</provide_feedback>
       </physics>
@@ -1303,11 +1270,11 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
     </joint>
+    
     <link name='toe1'>
-      <pose frame=''>-0.1805 0.1308 0 3.14159 -1.57079 3.14159</pose>
+      <pose relative_to='jtoe1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.06</mass>
@@ -1356,10 +1323,9 @@
           </script>
         </material>
       </visual>
-      <velocity_decay/>
       <sensor name='toe1_contact' type='contact'>
         <plugin name='toe1_plugin' filename='libgazebo_ros_bumper.so'>
-          <alwaysOn>true</alwaysOn>
+          <alwaysOn>1</alwaysOn>
           <updateRate>500</updateRate>
           <bumperTopicName>gazebo/toe1_contact_state</bumperTopicName>
           <frameName>world</frameName>
@@ -1370,20 +1336,19 @@
         </contact>
         <update_rate>500</update_rate>
       </sensor>
-      <gravity>1</gravity>
-      <velocity_decay/>
       <self_collide>0</self_collide>
     </link>
+
     <joint name='jtoe1' type='fixed'>
-      <child>toe1</child>
+      <pose relative_to='lower1'>0 0 -0.213 0 -0 0</pose>
       <parent>lower1</parent>
+      <child>toe1</child>
       <axis>
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
         <xyz>0 0 1</xyz>
-        <use_parent_model_frame>0</use_parent_model_frame>
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
@@ -1398,18 +1363,27 @@
         </ode>
       </physics>
     </joint>
+    
     <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+      <robotNamespace>/go2</robotNamespace>
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
     <plugin name='ground_truth_estimator' filename='libground_truth_estimator.so'>
       <updateRateHZ>500.0</updateRateHZ>
     </plugin>
-    <static>0</static>
     <plugin name='gazebo_ros_force' filename='libgazebo_ros_force.so'>
       <topicName>/apply_force/trunk</topicName>
       <bodyName>body</bodyName>
       <xyzOffset>0 0 0</xyzOffset>
       <rpyOffset>0 -0 0</rpyOffset>
     </plugin>
+    <frame name='imu_joint' attached_to='trunk'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </frame>
+    <frame name='imu_link' attached_to='imu_joint'/>
+    <frame name='floating_base' attached_to='body'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </frame>
+    <frame name='trunk' attached_to='floating_base'/>
   </model>
 </sdf>

@@ -6,9 +6,8 @@
   <arg name="controller" default="inverse_dynamics" />
   <arg name="live_plot" default="false" />
   <arg name="dash" default="false" />
-  <!-- <arg name="world" default="flat_100m" /> -->
-  <arg name="world" default="flat" />
-  <!-- <arg name="world" default="slope_20_down" /> -->
+  <!-- <arg name="world" default="flat" /> -->
+  <arg name="world" default="asphalt_world" />
   <arg name="logging" default="false" />
   <param name="/use_sim_time" value="true" />
 

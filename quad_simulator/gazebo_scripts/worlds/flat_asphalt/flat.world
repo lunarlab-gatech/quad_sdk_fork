@@ -23,21 +23,27 @@
         <visual name="visual">
           <geometry>
             <mesh>
-              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat_100m/flat_100m.stl</uri>
+              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat/flat.stl</uri>
             </mesh>
           </geometry>
+          <material>
+            <script>
+              <uri>model://flat/textures/grass_dry.png</uri>
+              <name>grass_dry</name>
+            </script>
+          </material>
         </visual>
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat_100m/flat_100m.stl</uri>
+              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat/flat.stl</uri>
             </mesh>
           </geometry>
           <surface>
             <friction>
               <ode>
-                <mu>50</mu>
-                <mu2>50</mu2>
+                <mu>100</mu>
+                <mu2>100</mu2>
               </ode>
             </friction>
           </surface>

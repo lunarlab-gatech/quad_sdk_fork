@@ -35,8 +35,8 @@
           <specular>1.0 1.0 1.0</specular>
 		  <pbr>
 			<metal>
-			   <albedo_map>materials/textures/grass_dry.png</albedo_map>
-			   <normal_map>materials/textures/grass_dry.png</normal_map>
+			   <albedo_map>/home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/grasspatch/materials/textures/grass_dry.png</albedo_map>
+			   <normal_map>/home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/grasspatch/materials/textures/grass_dry.png</normal_map>
 			</metal>
 		  </pbr>
 		</material>

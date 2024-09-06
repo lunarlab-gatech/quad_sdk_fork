@@ -6,7 +6,7 @@
   <arg name="controller" default="inverse_dynamics" />
   <arg name="live_plot" default="false" />
   <arg name="dash" default="false" />
-  <arg name="world" default="flat_100m" />
+  <arg name="world" default="asphalt_plane" />
   <!-- <arg name="world" default="flat" /> -->
   <arg name="logging" default="false" />
   <param name="/use_sim_time" value="true" />
@@ -27,23 +27,6 @@
     <arg name="input_type" value="mesh" />
     <arg name="world" value="$(arg world)" />
     <arg name="robot_type" value="$(arg robot_type)" />
-  </include>
-
-  <group if="$(eval arg('robot_type') == 'go2')">
-    <rosparam command="load" file="$(find quad_utils)/config/go2.yaml" />
-    <param name="robot_description_sdf" textfile="$(find go2_description)/sdf_mesh/go2.sdf" />
-    <param name="robot_description" command="cat $(find go2_description)/urdf/go2.urdf" />
-  </group>
-
-  <!-- Spawn SDF model -->
-  <node name="spawn_sdf_model" pkg="gazebo_ros" type="spawn_model" args="-sdf -param robot_description_sdf -model $(arg namespace) $(arg init_pose)" output="screen"/>
-
-
-  <!-- Load the visualization tools -->
-  <include file="$(find quad_utils)/launch/quad_visualization.launch">
-    <arg name="robot_type" value="$(arg robot_type)" />
-    <arg name="live_plot" value="$(arg live_plot)" />
-    <arg name="dash" value="$(arg dash)" />
   </include>
 
 </launch>

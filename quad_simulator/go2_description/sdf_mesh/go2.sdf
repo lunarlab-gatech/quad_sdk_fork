@@ -942,7 +942,7 @@
       <child>lower0</child>
       <physics>
         <provide_feedback>true</provide_feedback>
-      </physics2
+      </physics>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>

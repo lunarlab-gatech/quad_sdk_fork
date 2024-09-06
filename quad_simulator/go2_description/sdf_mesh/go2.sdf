@@ -151,7 +151,7 @@
         </surface>
       </collision>
       <visual name='hip2_visual_visual'>
-        <pose frame=''>0 0 0 3.14159 -0 0</pose>
+        <pose frame=''>0 0 0 -3.14159 -0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -205,8 +205,8 @@
           <izz>0.00103</izz>
         </inertia>
       </inertial>
-      <collision name='upper2_collision'>
-        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
+      <collision name='upper2_collision_collision'>
+        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
         <geometry>
           <box>
             <size>0.213 0.0245 0.034</size>
@@ -254,7 +254,7 @@
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 -1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -451,8 +451,8 @@
           <izz>0.000596</izz>
         </inertia>
       </inertial>
-      <collision name='hip3_collision'>
-        <pose frame=''>0 -0.0955 0 1.5708 -0 0</pose>
+      <collision name='hip3_collision_collision'>
+        <pose frame=''>0 0 0 1.5708 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.04</length>
@@ -472,7 +472,7 @@
         </surface>
       </collision>
       <visual name='hip3_visual_visual'>
-        <pose frame=''>0 0 0 -0 0 3.14159</pose>
+        <pose frame=''>0 0 0 0 -0 3.14159</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -526,8 +526,8 @@
           <izz>0.00103</izz>
         </inertia>
       </inertial>
-      <collision name='upper3_collision'>
-        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
+      <collision name='upper3_collision_collision'>
+        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
         <geometry>
           <box>
             <size>0.213 0.0245 0.034</size>
@@ -574,7 +574,7 @@
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 -1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -604,8 +604,8 @@
           <izz>3.29e-05</izz>
         </inertia>
       </inertial>
-      <collision name='lower3_collision'>
-        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
+      <collision name='lower3_collision_collision'>
+        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
         <geometry>
           <box>
             <size>0.213 0.016 0.016</size>
@@ -771,8 +771,8 @@
           <izz>0.000596</izz>
         </inertia>
       </inertial>
-      <collision name='hip0_collision'>
-        <pose frame=''>0 0.0955 0 1.5708 -0 0</pose>
+      <collision name='hip0_collision_collision'>
+        <pose frame=''>0 0 0 1.5708 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.04</length>
@@ -894,7 +894,7 @@
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 -1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -924,8 +924,8 @@
           <izz>3.29e-05</izz>
         </inertia>
       </inertial>
-      <collision name='lower0_collision'>
-        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
+      <collision name='lower0_collision_collision'>
+        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
         <geometry>
           <box>
             <size>0.213 0.016 0.016</size>
@@ -1091,8 +1091,8 @@
           <izz>0.000596</izz>
         </inertia>
       </inertial>
-      <collision name='hip1_collision'>
-        <pose frame=''>0 0.0955 0 1.5708 -0 0</pose>
+      <collision name='hip1_collision_collision'>
+        <pose frame=''>0 0 0 1.5708 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.04</length>
@@ -1112,7 +1112,7 @@
         </surface>
       </collision>
       <visual name='hip1_visual_visual'>
-        <pose frame=''>0 0 0 3.14159 0 3.14159</pose>
+        <pose frame=''>0 0 0 3.14159 -0 3.14159</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -1166,8 +1166,8 @@
           <izz>0.00103</izz>
         </inertia>
       </inertial>
-      <collision name='upper1_collision'>
-        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
+      <collision name='upper1_collision_collision'>
+        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
         <geometry>
           <box>
             <size>0.213 0.0245 0.034</size>
@@ -1214,7 +1214,7 @@
         <provide_feedback>true</provide_feedback>
       </physics>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 -1 0</xyz>
         <limit>
           <lower>-1.5708</lower>
           <upper>3.4907</upper>
@@ -1244,8 +1244,8 @@
           <izz>3.29e-05</izz>
         </inertia>
       </inertial>
-      <collision name='lower1_collision'>
-        <pose frame=''>0 0 -0.1065 0 1.5708 0</pose>
+      <collision name='lower1_collision_collision'>
+        <pose frame=''>0 0 -0.1 3.14159 1.57079 3.14159</pose>
         <geometry>
           <box>
             <size>0.213 0.016 0.016</size>

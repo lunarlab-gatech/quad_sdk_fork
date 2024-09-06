@@ -23,16 +23,20 @@
         <visual name="visual">
           <geometry>
             <mesh>
-              <uri>model:///flat/flat.stl</uri>
-              <scale>6 1 1</scale> <!-- Added scale tag here -->
+              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat/flat.stl</uri>
             </mesh>
           </geometry>
+          <material>
+            <script>
+              <uri>model://flat/textures/grass_dry.png</uri>
+              <name>grass_dry</name>
+            </script>
+          </material>
         </visual>
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>model:///flat/flat.stl</uri>
-              <scale>6 1 1</scale> <!-- Added scale tag here -->
+              <uri>file:///home/lunarlab/Desktop/quadruped_sim_ws/src/quad-sdk/quad_simulator/gazebo_scripts/worlds/flat/flat.stl</uri>
             </mesh>
           </geometry>
           <surface>

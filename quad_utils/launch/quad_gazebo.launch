@@ -8,8 +8,8 @@
   <arg name="dash" default="false" />
   <!-- <arg name="world" default="flat" /> -->
   <!-- <arg name="world" default="slope_20" /> -->
-  <!-- <arg name="world" default="rough_40cm_huge" /> -->
-  <arg name="world" default="step_10cm" />
+  <arg name="world" default="rough_25cm" />
+  <!-- <arg name="world" default="step_10cm" /> -->
   <arg name="logging" default="false" />
   <param name="/use_sim_time" value="true" />
 

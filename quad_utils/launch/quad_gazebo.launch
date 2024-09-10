@@ -1,13 +1,15 @@
 <launch>
   <arg name="robot_type" default="a1" />
   <arg name="multiple_robots" default="false" />
-  <arg name="gui" default="true" />
+  <arg name="gui" default="false" />
   <arg name="paused" default="false" />
   <arg name="controller" default="inverse_dynamics" />
   <arg name="live_plot" default="false" />
   <arg name="dash" default="false" />
-  <arg name="world" default="flat" />
-  <!-- <arg name="world" default="flat_asphalt" /> -->
+  <!-- <arg name="world" default="flat" /> -->
+  <!-- <arg name="world" default="slope_20" /> -->
+  <!-- <arg name="world" default="rough_40cm_huge" /> -->
+  <arg name="world" default="step_10cm" />
   <arg name="logging" default="false" />
   <param name="/use_sim_time" value="true" />
 
@@ -36,8 +38,9 @@
     <include file="$(find quad_utils)/launch/quad_spawn.launch">
       <arg name="robot_type" value="$(arg robot_type)" />
       <arg name="controller" default="$(arg controller)" />
-      <!-- <arg name="init_pose" value="-x 6.0 -y 0.0 -z 2.0" /> -->
-      <arg name="init_pose" value="-x 0.0 -y 0.0 -z 0.5" />
+      <!-- <arg name="init_pose" value="-x 0.75 -y 0.0 -z 2.0" /> -->
+      <!-- <arg name="init_pose" value="-x 0.0 -y 0.20 -z 0.5" /> -->
+      <arg name="init_pose" value="-x 1.5 -y 0.00 -z 0.5" />
       <arg name="namespace" value="robot_1" />
     </include>
     <param name="robot_type" value="$(arg robot_type)" />
